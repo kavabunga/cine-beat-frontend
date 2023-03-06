@@ -1,0 +1,130 @@
+.navigation {
+  display: none;
+  position: fixed;
+  inset: 0;
+  padding: 0;
+  padding-bottom: 46px;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+  background-color: #202020;
+}
+
+.navigation_opened {
+  display: flex;
+}
+
+.navigation__close-button {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0;
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: transparent url('../../images/close.svg');
+}
+
+.navigation__list {
+  flex-grow: 1;
+  padding: 0;
+  padding-top: 144px;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.navigation__element {
+  padding-bottom: 7px;
+}
+
+.navigation__element_type_main {
+}
+
+.navigation__link {
+  color: white;
+}
+
+.navigation__link_active {
+  padding-bottom: 7px;
+  border-bottom: 2px solid;
+}
+
+.navigation__link_type_profile {
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: #313131;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .navigation {
+    min-width: 520px;
+    inset: unset;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 90px;
+  }
+
+  .navigation__list {
+    padding-top: 159px;
+    gap: 22px;
+  }
+
+  .navigation__element {
+    padding-bottom: 4px;
+  }
+
+  .navigation__link_active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .navigation {
+    flex-grow: 1;
+    display: flex;
+    position: relative;
+    padding-bottom: 0;
+    flex-direction: row;
+  }
+
+  .navigation__close-button {
+    display: none;
+  }
+
+  .navigation__list {
+    padding: 0;
+    flex-direction: row;
+    gap: 16px;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .navigation__element {
+    padding-bottom: 0;
+  }
+
+  .navigation__element_type_main {
+    display: none;
+  }
+
+  .navigation__link_active {
+    padding-bottom: 0;
+    border-bottom: none;
+    font-weight: 500;
+  }
+}
