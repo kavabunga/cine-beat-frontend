@@ -9,7 +9,7 @@ export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <header className='header app__element'>
+    <header className='header'>
       <Logo />
       {isLoggedIn && <Hamburger setIsOpen={setIsOpen} />}
       {isLoggedIn ? (

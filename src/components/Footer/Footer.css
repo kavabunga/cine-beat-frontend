@@ -1,6 +1,6 @@
 .footer {
   margin: 0;
-  padding: 79px 0 20px;
+  padding: 79px 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: justify;
@@ -44,17 +44,14 @@
   gap: 12px;
 }
 
-.footer__element {
-}
-
 .footer__link {
   color: inherit;
 }
 
 @media screen and (min-width: 768px) {
   .footer {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     font-size: 13px;
     line-height: 1.2;
   }
@@ -78,7 +75,7 @@
 
 @media screen and (min-width: 1280px) {
   .footer {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 70px;
+    padding-right: 70px;
   }
 }

@@ -15,12 +15,6 @@
   text-rendering: optimizeLegibility;
 }
 
-.app__element {
-  margin-left: 10px;
-  margin-right: 10px;
-  box-sizing: border-box;
-}
-
 .app__link {
   text-decoration: none;
   transition: opacity 0.1s ease;
@@ -38,18 +32,4 @@
 .app__button:hover {
   opacity: 0.8;
   cursor: pointer;
-}
-
-@media screen and (min-width: 768px) {
-  .app__element {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .app__element {
-    margin-left: 40px;
-    margin-right: 40px;
-  }
 }
