@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: justify;
+}
+
+.main__section {
+  /* dev only */
+  height: 100px;
+  /* dev only */
+  border: 1px crimson dashed;
+
+  display: flex;
+  flex-direction: column;
+}
