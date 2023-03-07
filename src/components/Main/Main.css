@@ -6,9 +6,9 @@
 
 .main__section {
   /* dev only */
-  height: 100px;
+  /* height: 100px; */
   /* dev only */
-  border: 1px crimson dashed;
+  /* border: 1px crimson dashed; */
 
   display: flex;
   flex-direction: column;

@@ -1,10 +1,17 @@
 import React from 'react';
+import NavTab from '../NavTab/NavTab';
+
 import './Promo.css';
 
 export default function Promo() {
   return (
     <section className='promo main__section'>
-      <div className='promo__banner'></div>
+      <div className='promo__banner'>
+        <h1 className='promo__title'>
+          Учебный проект студента факультета Веб&#8209;разработки.
+        </h1>
+        <NavTab />
+      </div>
     </section>
   );
 }
