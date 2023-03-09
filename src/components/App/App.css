@@ -25,6 +25,10 @@
   cursor: pointer;
 }
 
+.app__link:focus {
+  outline: 1px solid #8b8b8b;
+}
+
 .app__button {
   transition: opacity 0.1s ease;
 }
@@ -32,4 +36,8 @@
 .app__button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.app__button:focus {
+  outline: 1px solid #8b8b8b;
 }

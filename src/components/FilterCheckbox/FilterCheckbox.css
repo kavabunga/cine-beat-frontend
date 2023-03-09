@@ -1,0 +1,59 @@
+.filter-checkbox__invisible-checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  background-color: transparent;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+}
+
+.filter-checkbox__visible-checkbox {
+  margin: 0;
+  padding: 0;
+  width: 36px;
+  height: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #8b8b8b;
+  border: none;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.filter-checkbox__visible-checkbox:before {
+  content: '';
+  margin: 2px;
+  padding: 0;
+  height: 16px;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+}
+
+.filter-checkbox__invisible-checkbox:disabled
+  + .filter-checkbox__visible-checkbox:before {
+  background-color: #f5f5f5;
+}
+.filter-checkbox__invisible-checkbox:disabled
+  + .filter-checkbox__visible-checkbox {
+  padding-left: 0;
+  background-color: #8b8b8b;
+}
+.filter-checkbox__invisible-checkbox:checked
+  + .filter-checkbox__visible-checkbox:before {
+  background-color: #ffffff;
+}
+.filter-checkbox__invisible-checkbox:checked
+  + .filter-checkbox__visible-checkbox {
+  padding-left: 16px;
+  background-color: #3ddc84;
+}
+.filter-checkbox__invisible-checkbox:focus
+  + .filter-checkbox__visible-checkbox {
+  outline: 1px solid #8b8b8b;
+}
