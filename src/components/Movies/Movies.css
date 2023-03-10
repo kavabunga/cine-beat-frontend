@@ -13,6 +13,20 @@
   border-bottom: 1px solid #424242;
 }
 
+.movies__show-more-button {
+  align-self: center;
+  margin: 50px 0 80px;
+  padding: 11px 20px 9px;
+  min-width: 240px;
+  background-color: transparent;
+  border: 1px solid #424242;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+}
+
 @media screen and (min-width: 768px) {
   .movies__section {
     margin: 0 30px;
@@ -21,10 +35,18 @@
   .movies__search-form {
     padding-bottom: 110px;
   }
+
+  .movies__show-more-button {
+    min-width: 320px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .movies__section {
     margin: 0 70px;
+  }
+
+  .movies__search-form {
+    padding-bottom: 70px;
   }
 }

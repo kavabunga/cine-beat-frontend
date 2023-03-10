@@ -1,6 +1,6 @@
 .movies-cards-list {
   margin: 0;
-  padding: 0;
+  padding: 50px 0 30px;
   list-style: none;
   display: grid;
   grid-template-columns: 1fr;
@@ -10,7 +10,15 @@
 
 @media screen and (min-width: 768px) {
   .movies-cards-list {
+    padding-top: 80px;
     grid-template-columns: 1fr 1fr;
     row-gap: 36px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .movies-cards-list {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 24px;
+    row-gap: 30px;
   }
 }

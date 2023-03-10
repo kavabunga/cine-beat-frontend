@@ -109,6 +109,10 @@ export default function Movies() {
     },
   ];
 
+  function showMore() {
+    console.log('show more fired');
+  }
+
   return (
     <main className='movies'>
       <section className='movies__section movies__search-form'>
@@ -120,6 +124,13 @@ export default function Movies() {
           buttonType='bookmark'
         />
       </section>
+      <button
+        className='movies__show-more-button app__button'
+        type='button'
+        onClick={showMore}
+      >
+        Ещё
+      </button>
     </main>
   );
 }

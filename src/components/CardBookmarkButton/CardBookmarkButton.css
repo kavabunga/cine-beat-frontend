@@ -19,6 +19,10 @@
   cursor: pointer;
 }
 
+.card-bookmark-button:focus {
+  outline: 1px solid #8b8b8b;
+}
+
 .card-bookmark-button_active {
   background-color: #3ddc84;
   background-image: url('../../images/bookmark-active.svg');
