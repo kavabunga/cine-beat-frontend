@@ -29,6 +29,10 @@
   line-height: 15px;
 }
 
+.movies__spacer {
+  height: 140px;
+}
+
 @media screen and (min-width: 768px) {
   .movies__section {
     margin: 0 30px;

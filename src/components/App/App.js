@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
+import AllMovies from '../AllMovies/AllMovies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Footer from '../Footer/Footer';
 import './App.css';
 
@@ -13,7 +14,8 @@ function App() {
     <div className='app'>
       <Header isLoggedIn={isLoggedIn} />
       {/* <Main /> */}
-      <Movies isLoaded={isLoaded} />
+      <AllMovies isLoaded={isLoaded} />
+      {/* <SavedMovies isLoaded={isLoaded} /> */}
       <Footer />
     </div>
   );
