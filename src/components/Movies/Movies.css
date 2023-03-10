@@ -5,6 +5,8 @@
 }
 
 .movies__section {
+  display: flex;
+  flex-direction: column;
   margin: 0 10px;
 }
 
@@ -20,7 +22,7 @@
   min-width: 240px;
   background-color: transparent;
   border: 1px solid #424242;
-  border-radius: 5px;
+  border-radius: 6px;
   color: white;
   font-weight: 500;
   font-size: 12px;

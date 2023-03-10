@@ -1,9 +1,10 @@
 import React from 'react';
+import Preloader from '../Preloader/Preloader';
 import MoviesCardsList from '../MoviesCardsList/MoviesCardsList';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 
-export default function Movies() {
+export default function Movies({ isLoaded }) {
   const cards = [
     {
       _id: '64011727375178fe22e2c05e',
@@ -118,19 +119,23 @@ export default function Movies() {
       <section className='movies__section movies__search-form'>
         <SearchForm />
       </section>
-      <section className='movies__section'>
-        <MoviesCardsList
-          cards={cards}
-          buttonType='bookmark'
-        />
-      </section>
-      <button
-        className='movies__show-more-button app__button'
-        type='button'
-        onClick={showMore}
-      >
-        Ещё
-      </button>
+      {isLoaded ? (
+        <section className='movies__section'>
+          <MoviesCardsList
+            cards={cards}
+            buttonType='bookmark'
+          />
+          <button
+            className='movies__show-more-button app__button'
+            type='button'
+            onClick={showMore}
+          >
+            Ещё
+          </button>
+        </section>
+      ) : (
+        <Preloader />
+      )}
     </main>
   );
 }

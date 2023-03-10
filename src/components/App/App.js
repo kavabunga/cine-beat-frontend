@@ -6,12 +6,14 @@ import Footer from '../Footer/Footer';
 import './App.css';
 
 function App() {
+  // const [isLoaded, setIsLoaded] = React.useState(false);
+  const isLoaded = true; // temporary value
   const isLoggedIn = true; // temporary value
   return (
     <div className='app'>
       <Header isLoggedIn={isLoggedIn} />
       {/* <Main /> */}
-      <Movies />
+      <Movies isLoaded={isLoaded} />
       <Footer />
     </div>
   );
