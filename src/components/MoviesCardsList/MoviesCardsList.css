@@ -1,0 +1,16 @@
+.movies-cards-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 30px;
+  row-gap: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .movies-cards-list {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 36px;
+  }
+}
