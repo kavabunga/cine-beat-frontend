@@ -3,11 +3,16 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 export default function SearchForm() {
-  const [isCheckedShorts, setIsCheckedShorts] = React.useState(false);
+  const [searchRequest, setSearchRequest] = React.useState({
+    text: '',
+    filterShorts: false,
+  });
 
-  function onCheckShorts() {
-    console.log('checker fired');
-    setIsCheckedShorts(!isCheckedShorts);
+  function handleChangeInput(e) {
+    setSearchRequest({ ...searchRequest, [e.target.name]: e.target.value });
+  }
+  function handleChangeCheckbox(e) {
+    setSearchRequest({ ...searchRequest, [e.target.name]: e.target.checked });
   }
 
   return (
@@ -15,12 +20,12 @@ export default function SearchForm() {
       <fieldset className='search-form__search'>
         <input
           className='search-form__input'
+          value={searchRequest.text}
+          name='text'
           type='text'
           placeholder='Фильм'
           required
-          onChange={() => {
-            console.log('input type catched');
-          }}
+          onChange={handleChangeInput}
         />
         <button
           type='submit'
@@ -29,8 +34,9 @@ export default function SearchForm() {
       </fieldset>
       <fieldset className='search-form__filter'>
         <FilterCheckbox
-          isChecked={isCheckedShorts}
-          onCheck={onCheckShorts}
+          isChecked={searchRequest.filterShorts}
+          onCheck={handleChangeCheckbox}
+          name='filterShorts'
         />
         <label className='search-form__filter-name'>Короткометражки</label>
       </fieldset>

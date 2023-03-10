@@ -18,9 +18,15 @@
   flex-direction: row;
   align-items: center;
   background-color: #8b8b8b;
+  opacity: 1;
   border: none;
   border-radius: 20px;
-  transition: background-color 0.3s ease, padding 0.3s ease;
+  transition: background-color 0.3s ease, padding 0.3s ease, opacity 0.1s ease;
+}
+
+.filter-checkbox__visible-checkbox:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .filter-checkbox__visible-checkbox:before {
