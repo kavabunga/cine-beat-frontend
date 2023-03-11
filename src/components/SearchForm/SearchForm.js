@@ -15,8 +15,16 @@ export default function SearchForm() {
     setSearchRequest({ ...searchRequest, [e.target.name]: e.target.checked });
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(searchRequest);
+  }
+
   return (
-    <form className='search-form'>
+    <form
+      className='search-form'
+      onSubmit={handleSubmit}
+    >
       <fieldset className='search-form__search'>
         <input
           className='search-form__input'
