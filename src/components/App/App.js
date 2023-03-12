@@ -6,6 +6,8 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import './App.css';
+import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn';
 
 function App() {
   const isLoaded = true; // temporary value
@@ -17,14 +19,16 @@ function App() {
 
   return (
     <div className='app'>
-      <Header isLoggedIn={isLoggedIn} />
+      {/* <Header isLoggedIn={isLoggedIn} /> */}
       {/* <Main /> */}
       {/* <AllMovies isLoaded={isLoaded} /> */}
       {/* <SavedMovies isLoaded={isLoaded} /> */}
-      <Profile
+      {/* <Profile
         user={user}
         onSubmit={setUser}
-      />
+      /> */}
+      {/* <SignUp /> */}
+      <SignIn />
       {/* <Footer /> */}
     </div>
   );
