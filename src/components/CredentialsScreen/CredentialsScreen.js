@@ -1,14 +1,29 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
+import Input from '../Input/Input';
 import './CredentialsScreen.css';
 
 export default function CredentialsScreen({
   title,
   submitButtonText,
-  onSubmit,
   extra,
-  children,
+  inputs,
 }) {
+  const [credentials, setCredentials] = React.useState(null);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log('submit: ', credentials);
+  }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setCredentials({
+      ...credentials,
+      [name]: value,
+    });
+  }
+
   return (
     <main className='credentials-screen'>
       <div className='credentials-screen__title-container'>
@@ -16,10 +31,27 @@ export default function CredentialsScreen({
         <h1 className='credentials-screen__title'>{title}</h1>
       </div>
       <form
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         className='credentials-screen__form'
       >
-        <fieldset className='credentials-screen__inputs'>{children}</fieldset>
+        <fieldset className='credentials-screen__inputs'>
+          {inputs &&
+            inputs.map((input) => (
+              <Input
+                label={input.label}
+                value={
+                  credentials && credentials[input.name]
+                    ? credentials[input.name]
+                    : ''
+                }
+                name={input.name}
+                type={input.type}
+                onChange={handleChange}
+                errorMessage={input.errorMessage}
+                key={input.name}
+              />
+            ))}
+        </fieldset>
         <button
           className='credentials-screen__submit-button credentials-screen__submit-button_active app__button'
           type='submit'
