@@ -12,7 +12,9 @@ export default function Footer() {
           <li className='footer__element'>
             <a
               className='footer__link app__link'
-              href='https://ya.ru'
+              href='https://practicum.yandex.ru/'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Яндекс.Практикум
             </a>
@@ -20,7 +22,9 @@ export default function Footer() {
           <li className='footer__element'>
             <a
               className='footer__link app__link'
-              href='https://ya.ru'
+              href='https://github.com/kavabunga'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Github
             </a>

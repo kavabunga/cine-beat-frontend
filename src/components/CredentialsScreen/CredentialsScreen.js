@@ -3,6 +3,7 @@ import Logo from '../Logo/Logo';
 import Input from '../Input/Input';
 import './CredentialsScreen.css';
 import ApiError from '../ApiError/ApiError';
+import { Link } from 'react-router-dom';
 
 export default function CredentialsScreen({
   title,
@@ -63,12 +64,12 @@ export default function CredentialsScreen({
       </form>
       <p className='credentials-screen__extra'>
         {extra.text}{' '}
-        <a
+        <Link
           className='credentials-screen__auth-link app__link'
-          href={extra.link}
+          to={extra.link}
         >
           {extra.name}
-        </a>
+        </Link>
       </p>
     </main>
   );

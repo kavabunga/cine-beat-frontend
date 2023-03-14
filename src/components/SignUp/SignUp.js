@@ -26,7 +26,7 @@ export default function SignUp() {
   const extra = {
     text: 'Уже зарегистрированы?',
     name: 'Войти',
-    link: 'https://ya.ru',
+    link: '/signin',
   };
 
   return (

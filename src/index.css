@@ -1,9 +1,9 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts/fonts.css');
 
-/* * {
-  border: solid 1px crimson;
-} */
+html {
+  scroll-behavior: smooth;
+}
 
 .body {
   background-color: #202020;

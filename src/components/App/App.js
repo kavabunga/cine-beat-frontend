@@ -6,10 +6,10 @@ import AllMovies from '../AllMovies/AllMovies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
-import './App.css';
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn';
 import NotFound from '../NotFound/NotFound';
+import './App.css';
 
 function App() {
   const location = useLocation();
@@ -18,7 +18,7 @@ function App() {
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
 
   const isLoaded = true; // temporary value
-  const isLoggedIn = true; // temporary value
+  const isLoggedIn = false; // temporary value
   const [user, setUser] = React.useState({
     name: 'Квентин',
     email: 'q.tarantino@miramax.com',

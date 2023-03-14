@@ -20,7 +20,7 @@ export default function SignIn() {
   const extra = {
     text: 'Ещё не зарегистрированы?',
     name: 'Регистрация',
-    link: 'https://ya.ru',
+    link: '/signup',
   };
 
   return (

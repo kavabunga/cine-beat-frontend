@@ -6,28 +6,28 @@ export default function NavTab() {
     <nav className='nav-tab'>
       <ul className='nav-tab__list'>
         <li className='nav-tab__element'>
-          <button
-            type='button'
-            className='nav-tab__button app__button'
+          <a
+            className='nav-tab__link app__link'
+            href='#about-project'
           >
             О проекте
-          </button>
+          </a>
         </li>
         <li className='nav-tab__element'>
-          <button
-            type='button'
-            className='nav-tab__button app__button'
+          <a
+            className='nav-tab__link app__link'
+            href='#techs'
           >
             Технологии
-          </button>
+          </a>
         </li>
         <li className='nav-tab__element'>
-          <button
-            type='button'
-            className='nav-tab__button app__button'
+          <a
+            className='nav-tab__link app__link'
+            href='#about-me'
           >
             Студент
-          </button>
+          </a>
         </li>
       </ul>
     </nav>

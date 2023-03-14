@@ -5,7 +5,10 @@ import './AboutMe.css';
 
 export default function AboutMe() {
   return (
-    <section className='about-me main__section'>
+    <section
+      id='about-me'
+      className='about-me main__section'
+    >
       <h2 className='main__section-title'>Студент</h2>
       <div className='about-me__profile'>
         <img

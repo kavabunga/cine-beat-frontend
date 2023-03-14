@@ -1,26 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Auth.css';
 
 export default function Auth() {
   return (
     <ul className='auth'>
       <li className='auth__element'>
-        <a
+        <Link
           className='auth__link app__link'
-          onClick=''
-          href='https://ya.ru'
+          to='/signup'
         >
           Регистрация
-        </a>
+        </Link>
       </li>
       <li className='auth__element'>
-        <a
+        <Link
           className='auth__link auth__link_type_login app__link'
-          onClick=''
-          href='https://ya.ru'
+          to='/signin'
         >
           Войти
-        </a>
+        </Link>
       </li>
     </ul>
   );

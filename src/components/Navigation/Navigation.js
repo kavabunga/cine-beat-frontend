@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 export default function Navigation({ isOpen, setIsOpen }) {
@@ -11,40 +12,54 @@ export default function Navigation({ isOpen, setIsOpen }) {
       />
       <ul className='navigation__list'>
         <li className='navigation__element navigation__element_type_main'>
-          <a
-            className='navigation__link app__link'
-            onClick=''
-            href='https://ya.ru'
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? 'navigation__link navigation__link_active app__link'
+                : 'navigation__link app__link'
+            }
+            to='/'
+            onClick={() => setIsOpen(false)}
+            end
           >
             Главная
-          </a>
+          </NavLink>
         </li>
         <li className='navigation__element'>
-          <a
-            className='navigation__link app__link navigation__link_active'
-            onClick=''
-            href='https://ya.ru'
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? 'navigation__link navigation__link_active app__link'
+                : 'navigation__link app__link'
+            }
+            to='/movies'
+            onClick={() => setIsOpen(false)}
+            end
           >
             Фильмы
-          </a>
+          </NavLink>
         </li>
         <li className='navigation__element'>
-          <a
-            className='navigation__link app__link'
-            onClick=''
-            href='https://ya.ru'
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? 'navigation__link navigation__link_active app__link'
+                : 'navigation__link app__link'
+            }
+            to='/saved-movies'
+            onClick={() => setIsOpen(false)}
+            end
           >
             Сохраненные фильмы
-          </a>
+          </NavLink>
         </li>
       </ul>
-      <a
+      <Link
         className='navigation__link navigation__link_type_profile app__link'
-        onClick=''
-        href='https://ya.ru'
+        to='/profile'
       >
         Аккаунт
-      </a>
+      </Link>
     </nav>
   );
 }
