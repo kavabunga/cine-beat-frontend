@@ -1,4 +1,5 @@
 import React from 'react';
+import ApiError from '../ApiError/ApiError';
 import './Profile.css';
 
 export default function Profile({ user, onSubmit }) {
@@ -45,6 +46,7 @@ export default function Profile({ user, onSubmit }) {
             />
           </label>
         </fieldset>
+        <ApiError message='' />
         <button
           className='profile__button profile__button_active app__button'
           type='submit'

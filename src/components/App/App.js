@@ -15,12 +15,7 @@ function App() {
   const location = useLocation();
 
   const headerShowForPaths = ['/', '/movies', '/saved-movies', '/profile'];
-
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
-
-  // React.useEffect(() => {
-  //   console.log(location);
-  // }, [location]);
 
   const isLoaded = true; // temporary value
   const isLoggedIn = true; // temporary value

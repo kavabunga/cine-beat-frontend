@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import Input from '../Input/Input';
 import './CredentialsScreen.css';
+import ApiError from '../ApiError/ApiError';
 
 export default function CredentialsScreen({
   title,
@@ -52,6 +53,7 @@ export default function CredentialsScreen({
               />
             ))}
         </fieldset>
+        <ApiError message='' />
         <button
           className='credentials-screen__submit-button credentials-screen__submit-button_active app__button'
           type='submit'
