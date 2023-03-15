@@ -17,6 +17,7 @@
 .about-me__article {
   display: flex;
   flex-direction: column;
+  align-self: stretch;
 }
 
 .about-me__title {
@@ -39,6 +40,7 @@
 }
 
 .about-me__text {
+  flex-grow: 1;
   margin: 0;
   margin-bottom: 40px;
   padding: 0;
@@ -60,6 +62,7 @@
   .about-me__profile {
     padding-top: 66px;
     flex-direction: row-reverse;
+    align-items: start;
     gap: 49px;
   }
 
@@ -79,7 +82,7 @@
   }
 
   .about-me__text {
-    margin-bottom: 87px;
+    margin-bottom: 20px;
     font-size: 12px;
     line-height: 18px;
   }
@@ -106,7 +109,6 @@
   }
 
   .about-me__text {
-    margin-bottom: 99px;
     font-size: 14px;
     line-height: 22px;
   }

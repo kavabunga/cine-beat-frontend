@@ -18,7 +18,7 @@ function App() {
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
 
   const isLoaded = true; // temporary value
-  const isLoggedIn = false; // temporary value
+  const isLoggedIn = true; // temporary value
   const [user, setUser] = React.useState({
     name: 'Квентин',
     email: 'q.tarantino@miramax.com',

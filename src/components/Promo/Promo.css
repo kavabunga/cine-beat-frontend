@@ -6,11 +6,16 @@
 }
 
 .promo__banner {
-  padding: 220px 0 17px;
+  margin: 0;
+  padding: 28.2vh 0 17px;
+  box-sizing: border-box;
+  min-height: calc(100vh - 194px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 212px;
+  justify-content: space-between;
+  /* gap: 212px; */
+  gap: 30px;
   background-color: #272727;
   border-radius: 10px;
 }
@@ -32,8 +37,8 @@
   }
 
   .promo__banner {
-    padding: 350px 0 30px;
-    gap: 314px;
+    padding: 34.2vh 0 30px;
+    min-height: calc(100vh - 190px);
   }
 
   .promo__title {
@@ -48,8 +53,8 @@
   }
 
   .promo__banner {
-    padding-top: 160px;
-    gap: 151px;
+    padding-top: 22.9vh;
+    min-height: calc(100vh - 207px);
   }
 
   .promo__title {

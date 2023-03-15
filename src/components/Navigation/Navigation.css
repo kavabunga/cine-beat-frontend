@@ -1,17 +1,22 @@
 .navigation {
-  display: none;
+  display: flex;
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: -100%;
+  bottom: 0;
   padding: 0;
   padding-bottom: 46px;
   margin: 0;
+  min-width: 100%;
   flex-direction: column;
   align-items: center;
   background-color: #202020;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
 }
 
 .navigation_opened {
-  display: flex;
+  transform: translate3d(-100%, 0, 0);
 }
 
 .navigation__close-button {
@@ -70,10 +75,7 @@
 @media screen and (min-width: 768px) {
   .navigation {
     min-width: 520px;
-    inset: unset;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    right: -520px;
     padding-bottom: 90px;
   }
 
@@ -92,11 +94,12 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .navigation {
     flex-grow: 1;
     display: flex;
     position: relative;
+    right: 0;
     padding-bottom: 0;
     flex-direction: row;
   }
