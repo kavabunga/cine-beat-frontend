@@ -14,8 +14,8 @@ export default function Portfolio() {
             className='portfolio__link app__link'
           >
             Статичный сайт
+            <span className='portfolio__icon'>↗</span>
           </a>
-          <span className='portfolio__icon'>↗</span>
         </li>
         <li className='portfolio__element'>
           <a
@@ -25,8 +25,8 @@ export default function Portfolio() {
             className='portfolio__link app__link'
           >
             Адаптивный сайт
+            <span className='portfolio__icon'>↗</span>
           </a>
-          <span className='portfolio__icon'>↗</span>
         </li>
         <li className='portfolio__element'>
           <a
@@ -36,8 +36,8 @@ export default function Portfolio() {
             className='portfolio__link app__link'
           >
             Одностраничное приложение
+            <span className='portfolio__icon'>↗</span>
           </a>
-          <span className='portfolio__icon'>↗</span>
         </li>
       </ul>
     </section>

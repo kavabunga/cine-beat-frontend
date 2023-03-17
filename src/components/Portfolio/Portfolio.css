@@ -24,14 +24,8 @@
 
 .portfolio__element {
   margin: 0;
-  padding: 20px 0 19px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: -0.04em;
+  padding: 0;
+
   border-bottom: 1px solid #e6e6e6;
 }
 
@@ -41,7 +35,14 @@
 
 .portfolio__link {
   margin: 0;
-  padding: 0;
+  padding: 20px 0 19px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.04em;
   color: white;
 }
 
@@ -61,7 +62,7 @@
     line-height: 20px;
   }
 
-  .portfolio__element {
+  .portfolio__link {
     font-size: 28px;
     line-height: 50px;
   }
@@ -77,7 +78,7 @@
     line-height: 20px;
   }
 
-  .portfolio__element {
+  .portfolio__link {
     font-size: 30px;
     line-height: 50px;
   }
