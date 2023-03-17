@@ -1,0 +1,28 @@
+.header {
+  position: relative;
+  margin: 0;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    gap: 44px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding-right: 70px;
+    padding-left: 70px;
+  }
+}

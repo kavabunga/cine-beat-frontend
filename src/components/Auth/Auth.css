@@ -1,0 +1,36 @@
+.auth {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-self: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.auth__link {
+  color: white;
+}
+
+.auth__link_type_login {
+  padding: 5px 12px;
+  border-radius: 3px;
+  color: black;
+  background-color: #3ddc84;
+}
+
+@media screen and (min-width: 768px) {
+  .auth {
+    font-size: 12px;
+    gap: 30px;
+  }
+
+  .auth__link_type_login {
+    padding: 8px 20px;
+  }
+}
