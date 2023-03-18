@@ -11,7 +11,7 @@ export default function FilterCheckbox({ isChecked, onCheck, name }) {
         checked={isChecked}
         onChange={onCheck}
       />
-      <div className='filter-checkbox__visible-checkbox' />
+      <span className='filter-checkbox__visible-checkbox' />
     </label>
   );
 }
