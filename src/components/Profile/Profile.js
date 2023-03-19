@@ -1,8 +1,10 @@
 import React from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import ApiError from '../ApiError/ApiError';
 import './Profile.css';
 
-export default function Profile({ user, onSubmit }) {
+export default function Profile({ onSubmit }) {
+  const user = React.useContext(UserContext);
   const [input, setInput] = React.useState(user);
 
   function handleChangeInput(e) {

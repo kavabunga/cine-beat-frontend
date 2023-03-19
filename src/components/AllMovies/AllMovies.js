@@ -1,7 +1,9 @@
 import React from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import Movies from '../Movies/Movies';
 
 export default function AllMovies({ isLoaded }) {
+  const user = React.useContext(UserContext);
   const cards = [
     {
       _id: '64011727375178fe22e2c05e',
