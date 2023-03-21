@@ -3,12 +3,26 @@ import { UserContext } from '../../contexts/UserContext';
 import ApiError from '../ApiError/ApiError';
 import './Profile.css';
 
-export default function Profile({ onSubmit }) {
+export default function Profile({
+  onSubmit,
+  onSignout,
+  infoMessage,
+  setInfoMessage,
+}) {
   const user = React.useContext(UserContext);
-  const [input, setInput] = React.useState(user);
+  const [input, setInput] = React.useState({ name: '', email: '' });
+
+  React.useEffect(() => {
+    setInfoMessage(null);
+  }, [setInfoMessage]);
+
+  React.useEffect(() => {
+    user !== null && setInput(user);
+  }, [user]);
 
   function handleChangeInput(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
+    infoMessage && setInfoMessage(null);
   }
 
   function handleSubmit(e) {
@@ -18,7 +32,7 @@ export default function Profile({ onSubmit }) {
 
   return (
     <main className='profile'>
-      <h1 className='profile__title'>Привет, {user.name}!</h1>
+      <h1 className='profile__title'>Привет{user ? ', ' + user.name : ''}!</h1>
       <form
         onSubmit={handleSubmit}
         className='profile__form'
@@ -48,7 +62,7 @@ export default function Profile({ onSubmit }) {
             />
           </label>
         </fieldset>
-        <ApiError message='' />
+        <ApiError message={infoMessage} />
         <button
           className='profile__button profile__button_active app__button'
           type='submit'
@@ -58,6 +72,7 @@ export default function Profile({ onSubmit }) {
         <button
           className='profile__button profile__button_type_logout app__button'
           type='button'
+          onClick={onSignout}
         >
           Выйти из аккаунта
         </button>

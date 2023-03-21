@@ -1,7 +1,7 @@
 import React from 'react';
 import CredentialsScreen from '../CredentialsScreen/CredentialsScreen';
 
-export default function SignUp() {
+export default function SignUp({ onSubmit, infoMessage, setInfoMessage }) {
   const inputs = [
     {
       label: 'Имя',
@@ -33,6 +33,9 @@ export default function SignUp() {
     <CredentialsScreen
       title='Добро пожаловать!'
       submitButtonText='Зарегистрироваться'
+      onSubmit={onSubmit}
+      infoMessage={infoMessage}
+      setInfoMessage={setInfoMessage}
       extra={extra}
       inputs={inputs}
     />

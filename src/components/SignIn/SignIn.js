@@ -1,7 +1,7 @@
 import React from 'react';
 import CredentialsScreen from '../CredentialsScreen/CredentialsScreen';
 
-export default function SignIn() {
+export default function SignIn({ onSubmit, infoMessage, setInfoMessage }) {
   const inputs = [
     {
       label: 'E-mail',
@@ -27,6 +27,9 @@ export default function SignIn() {
     <CredentialsScreen
       title='Рады видеть!'
       submitButtonText='Войти'
+      onSubmit={onSubmit}
+      infoMessage={infoMessage}
+      setInfoMessage={setInfoMessage}
       extra={extra}
       inputs={inputs}
     />

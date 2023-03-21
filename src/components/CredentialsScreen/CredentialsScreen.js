@@ -8,14 +8,21 @@ import { Link } from 'react-router-dom';
 export default function CredentialsScreen({
   title,
   submitButtonText,
+  onSubmit,
+  infoMessage,
+  setInfoMessage,
   extra,
   inputs,
 }) {
   const [credentials, setCredentials] = React.useState(null);
 
+  React.useEffect(() => {
+    setInfoMessage(null);
+  }, [setInfoMessage]);
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submit: ', credentials);
+    onSubmit(credentials);
   }
 
   function handleChange(e) {
@@ -24,6 +31,7 @@ export default function CredentialsScreen({
       ...credentials,
       [name]: value,
     });
+    infoMessage && setInfoMessage(null);
   }
 
   return (
@@ -54,7 +62,7 @@ export default function CredentialsScreen({
               />
             ))}
         </fieldset>
-        <ApiError message='' />
+        <ApiError message={infoMessage} />
         <button
           className='credentials-screen__submit-button credentials-screen__submit-button_active app__button'
           type='submit'

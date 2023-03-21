@@ -1,9 +1,21 @@
 import React from 'react';
 import { UserContext } from '../../contexts/UserContext';
+import mainApi from '../../utils/MainApi';
 import Movies from '../Movies/Movies';
 
 export default function SavedMovies({ isLoaded }) {
   const user = React.useContext(UserContext);
+  const [movies, setMovies] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    mainApi
+      .getBookmarkedMovies()
+      .then((res) => setMovies(res))
+      .catch((err) => setError(err));
+  }, []);
+
+  console.log('SavedMovies movies', movies);
   const cards = [
     {
       _id: '64011727375178fe22e2c03e',

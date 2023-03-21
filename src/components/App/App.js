@@ -1,6 +1,7 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
+import mainApi from '../../utils/MainApi';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import AllMovies from '../AllMovies/AllMovies';
@@ -14,15 +15,74 @@ import './App.css';
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = React.useState(null);
+  const [infoMessage, setInfoMessage] = React.useState(null);
 
   const headerShowForPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
 
+  React.useEffect(() => {
+    mainApi
+      .getUser()
+      .then((res) => {
+        const { name, email } = res;
+        setUser({ name, email });
+      })
+      .catch((err) => setUser(null));
+  }, []);
+
+  function handleSignin(credentials) {
+    const { email, password } = credentials;
+    mainApi
+      .signIn({ email, password })
+      .then((res) => {
+        const { name, email } = res;
+        setUser({ name, email });
+        setInfoMessage(null);
+      })
+      .then((res) => navigate('/movies'))
+      .catch((err) => setInfoMessage(err.message));
+  }
+
+  function handleSignup(credentials) {
+    mainApi
+      .signUp(credentials)
+      .then((res) => {
+        handleSignin(credentials);
+      })
+      .catch((err) => {
+        setInfoMessage(err.message);
+      });
+  }
+
+  function handleSignout() {
+    mainApi
+      .signOut()
+      .then((res) => {
+        setInfoMessage(null);
+        setUser(null);
+      })
+      .then((res) => navigate('/'))
+      .catch((err) => {
+        setInfoMessage(err.message);
+      });
+  }
+
+  function handleUpdateUser(credentials) {
+    mainApi
+      .updateUser(credentials)
+      .then((res) => {
+        setInfoMessage(null);
+        const { name, email } = res;
+        setUser({ name, email });
+      })
+      .catch((err) => {
+        setInfoMessage(err.message);
+      });
+  }
+
   const isLoaded = true; // temporary value
-  const [user, setUser] = React.useState({
-    name: 'Квентин',
-    email: 'q.tarantino@miramax.com',
-  }); // temporary value
 
   return (
     <UserContext.Provider value={user}>
@@ -43,15 +103,34 @@ function App() {
           />
           <Route
             path='/profile'
-            element={<Profile onSubmit={setUser} />}
+            element={
+              <Profile
+                onSubmit={handleUpdateUser}
+                onSignout={handleSignout}
+                infoMessage={infoMessage}
+                setInfoMessage={setInfoMessage}
+              />
+            }
           />
           <Route
             path='/signup'
-            element={<SignUp />}
+            element={
+              <SignUp
+                onSubmit={handleSignup}
+                infoMessage={infoMessage}
+                setInfoMessage={setInfoMessage}
+              />
+            }
           />
           <Route
             path='/signin'
-            element={<SignIn />}
+            element={
+              <SignIn
+                onSubmit={handleSignin}
+                infoMessage={infoMessage}
+                setInfoMessage={setInfoMessage}
+              />
+            }
           />
           <Route
             path='*'
