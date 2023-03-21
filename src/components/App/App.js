@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import mainApi from '../../utils/MainApi';
+import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import AllMovies from '../AllMovies/AllMovies';
@@ -17,19 +18,24 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = React.useState(null);
+  const [userIsChecking, setUserIsChecking] = React.useState(true);
   const [infoMessage, setInfoMessage] = React.useState(null);
 
   const headerShowForPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
 
   React.useEffect(() => {
-    mainApi
-      .getUser()
-      .then((res) => {
-        const { name, email } = res;
-        setUser({ name, email });
-      })
-      .catch((err) => setUser(null));
+    if (!user) {
+      setUserIsChecking(true);
+      mainApi
+        .getUser()
+        .then((res) => {
+          const { name, email } = res;
+          setUser({ name, email });
+        })
+        .catch((err) => setUser(null))
+        .finally((res) => setUserIsChecking(false));
+    }
   }, []);
 
   function handleSignin(credentials) {
@@ -95,16 +101,30 @@ function App() {
           />
           <Route
             path='/movies'
-            element={<AllMovies isLoaded={isLoaded} />}
+            element={
+              <ProtectedRouteElement
+                isChecking={userIsChecking}
+                element={AllMovies}
+                isLoaded={isLoaded}
+              />
+            }
           />
           <Route
             path='/saved-movies'
-            element={<SavedMovies isLoaded={isLoaded} />}
+            element={
+              <ProtectedRouteElement
+                isChecking={userIsChecking}
+                element={SavedMovies}
+                isLoaded={isLoaded}
+              />
+            }
           />
           <Route
             path='/profile'
             element={
-              <Profile
+              <ProtectedRouteElement
+                isChecking={userIsChecking}
+                element={Profile}
                 onSubmit={handleUpdateUser}
                 onSignout={handleSignout}
                 infoMessage={infoMessage}
