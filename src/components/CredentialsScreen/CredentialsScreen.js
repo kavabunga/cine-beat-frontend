@@ -16,7 +16,7 @@ export default function CredentialsScreen({
   extra,
   inputs,
 }) {
-  const { values, handleChange, errors, isValid, resetForm } = useForm();
+  const { values, handleChange, errors, isValid } = useForm();
 
   React.useEffect(() => {
     setInfoMessage({

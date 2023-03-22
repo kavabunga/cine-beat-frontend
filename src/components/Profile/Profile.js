@@ -23,7 +23,7 @@ export default function Profile({
 
   React.useEffect(() => {
     user !== null && setValues(user);
-  }, [user]);
+  }, [user, setValues]);
 
   function handleFieldChange(e) {
     handleChange(e);
@@ -53,10 +53,12 @@ export default function Profile({
               type='text'
               value={values.name}
               name='name'
-              pattern='/^[А-ЯA-ZёәіңғүұқөһӘІҢҒҮҰҚӨҺh-]+$/umi'
+              pattern='[- А-Яа-яA-Za-zё]+$'
               required
               onChange={handleFieldChange}
-              className='profile__input'
+              className={`profile__input ${
+                errors.name ? 'profile__input_error' : ''
+              }`}
             />
           </label>
 
@@ -68,9 +70,21 @@ export default function Profile({
               name='email'
               required
               onChange={handleFieldChange}
-              className='profile__input'
+              className={`profile__input ${
+                errors.email ? 'profile__input_error' : ''
+              }`}
             />
           </label>
+          {errors.name && (
+            <span className='profile__error'>
+              Ошибка в имени. {errors.name}
+            </span>
+          )}
+          {errors.email && (
+            <span className='profile__error'>
+              Ошибка в почте. {errors.email}
+            </span>
+          )}
         </fieldset>
         <ApiInfo
           message={infoMessage.message}
@@ -90,7 +104,7 @@ export default function Profile({
             !(values.name !== user.name || values.email !== user.email)
           }
         >
-          Редактировать
+          {isSubmitting ? 'Запрос отправляется' : 'Редактировать'}
         </button>
         <button
           className='profile__button profile__button_type_logout app__button'

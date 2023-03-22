@@ -69,11 +69,26 @@
   text-align: right;
 }
 
+.profile__input_error {
+  color: #ee3465;
+}
+
 .profile__input:focus {
   outline: none;
   background: transparent;
   /* margin-bottom: -1px;
   border-bottom: 1px solid #8b8b8b; */
+}
+
+.profile__error {
+  margin: 0;
+  padding: 4px 0;
+  box-sizing: border-box;
+  max-width: 260px;
+  /* font-weight: 400; */
+  font-size: 11px;
+  line-height: 13px;
+  color: #ee3465;
 }
 
 .profile__button {
@@ -115,6 +130,10 @@
 
   .profile__form {
     min-width: 410px;
+  }
+
+  .profile__error {
+    max-width: 410px;
   }
 
   .profile__button {
