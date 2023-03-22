@@ -45,10 +45,15 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
+  transition: border-bottom 0.5s ease;
 }
 
 .profile__label:last-of-type {
   border-bottom: none;
+}
+
+.profile__label:focus-within {
+  border-bottom: 1px solid #4285f4;
 }
 
 .profile__input {
@@ -67,8 +72,8 @@
 .profile__input:focus {
   outline: none;
   background: transparent;
-  margin-bottom: -1px;
-  border-bottom: 1px solid #8b8b8b;
+  /* margin-bottom: -1px;
+  border-bottom: 1px solid #8b8b8b; */
 }
 
 .profile__button {
@@ -77,10 +82,20 @@
   padding: 0;
   border: none;
   background-color: transparent;
-  color: #ffffff;
+  color: #424242;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
+  transition: color 0.5s ease, opacity 0.1s ease;
+}
+
+.profile__button_active {
+  color: white;
+}
+
+.profile__button_active:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .profile__button_type_logout {

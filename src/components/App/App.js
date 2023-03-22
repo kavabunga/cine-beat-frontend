@@ -19,7 +19,11 @@ function App() {
   const navigate = useNavigate();
   const [user, setUser] = React.useState(null);
   const [userIsChecking, setUserIsChecking] = React.useState(true);
-  const [infoMessage, setInfoMessage] = React.useState(null);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [infoMessage, setInfoMessage] = React.useState({
+    message: null,
+    type: null,
+  });
 
   const headerShowForPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
@@ -39,53 +43,84 @@ function App() {
   }, []);
 
   function handleSignin(credentials) {
+    setIsSubmitting(true);
     const { email, password } = credentials;
     mainApi
       .signIn({ email, password })
       .then((res) => {
         const { name, email } = res;
         setUser({ name, email });
-        setInfoMessage(null);
+        setInfoMessage({
+          message: null,
+          type: null,
+        });
       })
-      .then((res) => navigate('/movies'))
-      .catch((err) => setInfoMessage(err.message));
+      .then(() => navigate('/movies'))
+      .catch((err) =>
+        setInfoMessage({
+          message: err.message,
+          type: 'error',
+        })
+      )
+      .finally(() => setIsSubmitting(false));
   }
 
   function handleSignup(credentials) {
+    setIsSubmitting(true);
     mainApi
       .signUp(credentials)
       .then((res) => {
         handleSignin(credentials);
       })
       .catch((err) => {
-        setInfoMessage(err.message);
-      });
+        setInfoMessage({
+          message: err.message,
+          type: 'error',
+        });
+      })
+      .finally(() => setIsSubmitting(false));
   }
 
   function handleSignout() {
+    setIsSubmitting(true);
     mainApi
       .signOut()
       .then((res) => {
-        setInfoMessage(null);
+        setInfoMessage({
+          message: null,
+          type: null,
+        });
         setUser(null);
       })
       .then((res) => navigate('/'))
       .catch((err) => {
-        setInfoMessage(err.message);
-      });
+        setInfoMessage({
+          message: err.message,
+          type: 'error',
+        });
+      })
+      .finally(() => setIsSubmitting(false));
   }
 
   function handleUpdateUser(credentials) {
+    setIsSubmitting(true);
     mainApi
       .updateUser(credentials)
       .then((res) => {
-        setInfoMessage(null);
+        setInfoMessage({
+          message: 'Данные обновлены',
+          type: 'success',
+        });
         const { name, email } = res;
         setUser({ name, email });
       })
       .catch((err) => {
-        setInfoMessage(err.message);
-      });
+        setInfoMessage({
+          message: err.message,
+          type: 'error',
+        });
+      })
+      .finally(() => setIsSubmitting(false));
   }
 
   const isLoaded = true; // temporary value
@@ -126,6 +161,7 @@ function App() {
                 isChecking={userIsChecking}
                 element={Profile}
                 onSubmit={handleUpdateUser}
+                isSubmitting={isSubmitting}
                 onSignout={handleSignout}
                 infoMessage={infoMessage}
                 setInfoMessage={setInfoMessage}
@@ -137,6 +173,7 @@ function App() {
             element={
               <SignUp
                 onSubmit={handleSignup}
+                isSubmitting={isSubmitting}
                 infoMessage={infoMessage}
                 setInfoMessage={setInfoMessage}
               />
@@ -147,6 +184,7 @@ function App() {
             element={
               <SignIn
                 onSubmit={handleSignin}
+                isSubmitting={isSubmitting}
                 infoMessage={infoMessage}
                 setInfoMessage={setInfoMessage}
               />

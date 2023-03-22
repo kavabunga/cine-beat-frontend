@@ -1,25 +1,28 @@
 import React from 'react';
 import CredentialsScreen from '../CredentialsScreen/CredentialsScreen';
 
-export default function SignUp({ onSubmit, infoMessage, setInfoMessage }) {
+export default function SignUp({
+  onSubmit,
+  isSubmitting,
+  infoMessage,
+  setInfoMessage,
+}) {
   const inputs = [
     {
       label: 'Имя',
       name: 'name',
       type: 'text',
-      errorMessage: '',
+      pattern: '[- А-Яа-яA-Za-zё]+$',
     },
     {
       label: 'E-mail',
       name: 'email',
-      type: 'text',
-      errorMessage: '',
+      type: 'email',
     },
     {
       label: 'Пароль',
       name: 'password',
       type: 'password',
-      errorMessage: 'Что-то пошло не так...',
     },
   ];
 
@@ -34,6 +37,7 @@ export default function SignUp({ onSubmit, infoMessage, setInfoMessage }) {
       title='Добро пожаловать!'
       submitButtonText='Зарегистрироваться'
       onSubmit={onSubmit}
+      isSubmitting={isSubmitting}
       infoMessage={infoMessage}
       setInfoMessage={setInfoMessage}
       extra={extra}

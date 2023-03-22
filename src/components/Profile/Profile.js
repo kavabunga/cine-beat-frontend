@@ -1,33 +1,42 @@
 import React from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import ApiError from '../ApiError/ApiError';
+import useForm from '../../utils/useForm';
+import ApiInfo from '../ApiInfo/ApiInfo';
 import './Profile.css';
 
 export default function Profile({
   onSubmit,
+  isSubmitting,
   onSignout,
   infoMessage,
   setInfoMessage,
 }) {
   const user = React.useContext(UserContext);
-  const [input, setInput] = React.useState({ name: '', email: '' });
+  const { values, handleChange, errors, isValid, setValues } = useForm();
 
   React.useEffect(() => {
-    setInfoMessage(null);
+    setInfoMessage({
+      message: null,
+      type: null,
+    });
   }, [setInfoMessage]);
 
   React.useEffect(() => {
-    user !== null && setInput(user);
+    user !== null && setValues(user);
   }, [user]);
 
-  function handleChangeInput(e) {
-    setInput({ ...input, [e.target.name]: e.target.value });
-    infoMessage && setInfoMessage(null);
+  function handleFieldChange(e) {
+    handleChange(e);
+    infoMessage &&
+      setInfoMessage({
+        message: null,
+        type: null,
+      });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(input);
+    onSubmit(values);
   }
 
   return (
@@ -42,10 +51,11 @@ export default function Profile({
             Имя
             <input
               type='text'
-              value={input.name}
+              value={values.name}
               name='name'
+              pattern='/^[А-ЯA-ZёәіңғүұқөһӘІҢҒҮҰҚӨҺh-]+$/umi'
               required
-              onChange={handleChangeInput}
+              onChange={handleFieldChange}
               className='profile__input'
             />
           </label>
@@ -53,19 +63,32 @@ export default function Profile({
           <label className='profile__label'>
             E-mail
             <input
-              type='text'
-              value={input.email}
+              type='email'
+              value={values.email}
               name='email'
               required
-              onChange={handleChangeInput}
+              onChange={handleFieldChange}
               className='profile__input'
             />
           </label>
         </fieldset>
-        <ApiError message={infoMessage} />
+        <ApiInfo
+          message={infoMessage.message}
+          type={infoMessage.type}
+        />
         <button
-          className='profile__button profile__button_active app__button'
+          className={`profile__button ${
+            !isSubmitting &&
+            isValid &&
+            (values.name !== user.name || values.email !== user.email) &&
+            'profile__button_active'
+          }`}
           type='submit'
+          disabled={
+            isSubmitting ||
+            !isValid ||
+            !(values.name !== user.name || values.email !== user.email)
+          }
         >
           Редактировать
         </button>
