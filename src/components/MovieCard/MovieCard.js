@@ -1,4 +1,5 @@
 import React from 'react';
+import { IMAGES_URL } from '../../utils/constants.ts';
 import { calculateDuration } from '../../utils/helpers';
 import CardBookmarkButton from '../CardBookmarkButton/CardBookmarkButton';
 import CardDeleteButton from '../CardDeleteButton/CardDeleteButton';
@@ -29,7 +30,7 @@ export default function MovieCard({ content, onClick, buttonType }) {
         {buttonType === 'delete' && <CardDeleteButton onClick={onClick} />}
       </div>
       <img
-        src={content.image}
+        src={IMAGES_URL + content.image.url}
         alt={`Обложка фильма ${content.nameRU}`}
         className='movie-card__image'
       />

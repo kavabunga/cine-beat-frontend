@@ -2,33 +2,49 @@ import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-export default function SearchForm() {
-  const [searchRequest, setSearchRequest] = React.useState({
-    text: '',
-    filterShorts: false,
-  });
-
+export default function SearchForm({
+  onSubmit,
+  request,
+  setRequest,
+  filter,
+  setFilter,
+  setInfoMessage,
+}) {
   function handleChangeInput(e) {
-    setSearchRequest({ ...searchRequest, [e.target.name]: e.target.value });
+    setRequest(e.target.value);
+    setInfoMessage({
+      message: null,
+      type: null,
+    });
   }
   function handleChangeCheckbox(e) {
-    setSearchRequest({ ...searchRequest, [e.target.name]: e.target.checked });
+    setFilter(e.target.checked);
+    setInfoMessage({
+      message: null,
+      type: null,
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(searchRequest);
+    request
+      ? onSubmit()
+      : setInfoMessage({
+          message: 'Нужно ввести ключевое слово',
+          type: 'error',
+        });
   }
 
   return (
     <form
       className='search-form'
       onSubmit={handleSubmit}
+      noValidate
     >
       <fieldset className='search-form__search'>
         <input
           className='search-form__input'
-          value={searchRequest.text}
+          value={request}
           name='text'
           type='text'
           placeholder='Фильм'
@@ -38,11 +54,11 @@ export default function SearchForm() {
         <button
           type='submit'
           className='search-form__submit-button app__button'
-        ></button>
+        />
       </fieldset>
       <fieldset className='search-form__filter'>
         <FilterCheckbox
-          isChecked={searchRequest.filterShorts}
+          isChecked={filter}
           onCheck={handleChangeCheckbox}
           name='filterShorts'
         />

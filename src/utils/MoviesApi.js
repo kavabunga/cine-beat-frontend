@@ -11,13 +11,13 @@ class MoviesApi {
   _fetchRequest(url, options) {
     return fetch(url, options).then((res) => {
       if (res.ok) {
-        return res.json().then((res) => res.data);
+        return res.json();
       }
       return Promise.reject(new Error(`Ошибка ${res.status}. ${res.message}`));
     });
   }
 
-  getAllMovies() {
+  getMovies() {
     return this._fetchRequest(this._baseUrl, {
       method: 'GET',
       headers: this._headers,

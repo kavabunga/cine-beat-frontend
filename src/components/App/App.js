@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import mainApi from '../../utils/MainApi';
+import { GALLERY_BREAKPOINTS } from '../../utils/constants.ts';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -20,10 +21,12 @@ function App() {
   const [user, setUser] = React.useState(null);
   const [userIsChecking, setUserIsChecking] = React.useState(true);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isLoadingContent, setIsLoadingContent] = React.useState(false);
   const [infoMessage, setInfoMessage] = React.useState({
     message: null,
     type: null,
   });
+  const [screenParams, setScreenParams] = React.useState(null);
 
   const headerShowForPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
@@ -41,6 +44,24 @@ function App() {
         .finally((res) => setUserIsChecking(false));
     }
   }, []);
+
+  React.useEffect(() => {
+    let resizeTimer;
+    setScreenParams(checkWindowSize());
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => setScreenParams(checkWindowSize()), 500);
+    });
+  }, []);
+
+  function checkWindowSize() {
+    let params;
+    GALLERY_BREAKPOINTS.forEach(
+      (b) =>
+        window.matchMedia(`(min-width: ${b.width}px)`).matches && (params = b)
+    );
+    return params;
+  }
 
   function handleSignin(credentials) {
     setIsSubmitting(true);
@@ -123,8 +144,6 @@ function App() {
       .finally(() => setIsSubmitting(false));
   }
 
-  const isLoaded = true; // temporary value
-
   return (
     <UserContext.Provider value={user}>
       <div className='app'>
@@ -140,7 +159,11 @@ function App() {
               <ProtectedRouteElement
                 isChecking={userIsChecking}
                 element={AllMovies}
-                isLoaded={isLoaded}
+                isLoading={isLoadingContent}
+                setIsLoading={setIsLoadingContent}
+                infoMessage={infoMessage}
+                setInfoMessage={setInfoMessage}
+                screenParams={screenParams}
               />
             }
           />
@@ -150,7 +173,10 @@ function App() {
               <ProtectedRouteElement
                 isChecking={userIsChecking}
                 element={SavedMovies}
-                isLoaded={isLoaded}
+                isLoading={isLoadingContent}
+                setIsLoading={setIsLoadingContent}
+                infoMessage={infoMessage}
+                setInfoMessage={setInfoMessage}
               />
             }
           />

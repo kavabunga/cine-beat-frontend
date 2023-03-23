@@ -4,37 +4,91 @@ import MoviesCardsList from '../MoviesCardsList/MoviesCardsList';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 
-export default function Movies({ cards, isLoaded, buttonType }) {
-  function showMore() {
-    console.log('show more fired');
-  }
+const Movies = React.memo(
+  ({
+    isLoading,
+    setIsLoading,
+    buttonType,
+    onSearch,
+    request,
+    setRequest,
+    filter,
+    setFilter,
+    movies,
+    infoMessage,
+    setInfoMessage,
+    showMore,
+    cardsNumber,
+    onCheckbox,
+  }) => {
+    function handleSearchSubmit() {
+      setIsLoading(true);
+      onSearch()
+        .then((res) => {
+          res.length === 0 &&
+            setInfoMessage({
+              message: 'Ничего не найдено',
+              type: 'info',
+            });
+        })
+        .catch(() => {
+          setInfoMessage({
+            message:
+              'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+            type: 'error',
+          });
+        })
+        .finally(() => setIsLoading(false));
+    }
 
-  return (
-    <main className='movies'>
-      <section className='movies__section movies__search-form'>
-        <SearchForm />
-      </section>
-      {isLoaded ? (
-        <section className='movies__section'>
-          <MoviesCardsList
-            cards={cards}
-            buttonType={buttonType}
+    return (
+      <main className='movies'>
+        <section className='movies__section movies__search-form'>
+          <SearchForm
+            request={request}
+            setRequest={setRequest}
+            filter={filter}
+            setFilter={setFilter}
+            onSubmit={handleSearchSubmit}
+            setInfoMessage={setInfoMessage}
           />
-          {cards.length > 3 ? (
-            <button
-              className='movies__show-more-button app__button'
-              type='button'
-              onClick={showMore}
-            >
-              Ещё
-            </button>
-          ) : (
-            <div className='movies__spacer' />
-          )}
         </section>
-      ) : (
-        <Preloader />
-      )}
-    </main>
-  );
-}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <section className='movies__section'>
+            {infoMessage.message && (
+              <div className='movies__info-container'>
+                <p
+                  className={`movies__info-text movies__info-text_type_${infoMessage.type}`}
+                >
+                  {infoMessage.message}
+                </p>
+              </div>
+            )}
+            {movies && (
+              <MoviesCardsList
+                cards={movies}
+                buttonType={buttonType}
+                cardsNumber={cardsNumber}
+              />
+            )}
+            {movies && movies.length > cardsNumber ? (
+              <button
+                className='movies__show-more-button app__button'
+                type='button'
+                onClick={showMore}
+              >
+                Ещё
+              </button>
+            ) : (
+              <div className='movies__spacer' />
+            )}
+          </section>
+        )}
+      </main>
+    );
+  }
+);
+
+export default Movies;
