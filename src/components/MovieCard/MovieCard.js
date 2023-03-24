@@ -17,7 +17,8 @@ export default function MovieCard({
   );
   const [isCardButtonDisabled, setIsCardButtonDisabled] = React.useState(false);
 
-  function handleButtonClick() {
+  function handleButtonClick(e) {
+    e.preventDefault();
     setIsCardButtonDisabled(true);
     if (buttonType === 'bookmark' && !isBookmarked) {
       bookmark(content)
@@ -42,33 +43,40 @@ export default function MovieCard({
   }
 
   return (
-    <li className='movie-card'>
-      <div className='movie-card__container'>
-        <article className='movie-card__description'>
-          <h2 className='movie-card__title'>{content.nameRU}</h2>
-          <p className='movie-card__duration'>
-            {calculateDuration(content.duration)}
-          </p>
-        </article>
-        {buttonType === 'bookmark' && (
-          <CardBookmarkButton
-            onClick={handleButtonClick}
-            isActive={isBookmarked}
-            isDisabled={isCardButtonDisabled}
-          />
-        )}
-        {buttonType === 'delete' && (
-          <CardDeleteButton
-            onClick={handleButtonClick}
-            isDisabled={isCardButtonDisabled}
-          />
-        )}
-      </div>
-      <img
-        src={content.image}
-        alt={`Обложка фильма ${content.nameRU}`}
-        className='movie-card__image'
-      />
-    </li>
+    <a
+      href={content.trailerLink}
+      target='_blank'
+      rel='noopener noreferrer'
+      className='app__link'
+    >
+      <li className='movie-card'>
+        <div className='movie-card__container'>
+          <article className='movie-card__description'>
+            <h2 className='movie-card__title'>{content.nameRU}</h2>
+            <p className='movie-card__duration'>
+              {calculateDuration(content.duration)}
+            </p>
+          </article>
+          {buttonType === 'bookmark' && (
+            <CardBookmarkButton
+              onClick={handleButtonClick}
+              isActive={isBookmarked}
+              isDisabled={isCardButtonDisabled}
+            />
+          )}
+          {buttonType === 'delete' && (
+            <CardDeleteButton
+              onClick={handleButtonClick}
+              isDisabled={isCardButtonDisabled}
+            />
+          )}
+        </div>
+        <img
+          src={content.image}
+          alt={`Обложка фильма ${content.nameRU}`}
+          className='movie-card__image'
+        />
+      </li>
+    </a>
   );
 }

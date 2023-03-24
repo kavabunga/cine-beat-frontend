@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   background-color: #222222;
+  color: white;
 }
 
 .movie-card__container {
@@ -11,13 +12,13 @@
   padding: 14px;
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  justify-content: space-between;
 }
 
 .movie-card__description {
-  flex-grow: 1;
   margin: 0;
   padding: 0;
+  max-width: calc(100% - 30px - 32px);
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -29,6 +30,9 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movie-card__duration {
@@ -44,4 +48,10 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+@media screen and (min-width: 1024px) {
+  .movie-card__description {
+    max-width: calc(100% - 30px - 26px);
+  }
 }
