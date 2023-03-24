@@ -2,7 +2,15 @@ import React from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import './MoviesCardsList.css';
 
-export default function MoviesCardsList({ cards, cardsNumber, buttonType }) {
+export default function MoviesCardsList({
+  cards,
+  cardsNumber,
+  buttonType,
+  bookmarkedMovies,
+  bookmark,
+  unBookmark,
+  setInfoMessage,
+}) {
   return (
     <ul className='movies-cards-list'>
       {cards &&
@@ -10,7 +18,11 @@ export default function MoviesCardsList({ cards, cardsNumber, buttonType }) {
           <MovieCard
             content={element}
             buttonType={buttonType}
-            key={element.id}
+            key={element.movieId}
+            bookmarkedMovies={bookmarkedMovies}
+            bookmark={bookmark}
+            unBookmark={unBookmark}
+            setInfoMessage={setInfoMessage}
           />
         ))}
     </ul>

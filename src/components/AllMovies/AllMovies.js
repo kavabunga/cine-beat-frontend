@@ -1,7 +1,8 @@
 import React from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { IMAGES_URL } from '../../utils/constants.ts';
 import { filterOnRequest, filterOnDuration } from '../../utils/helpers';
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 import Movies from '../Movies/Movies';
 
 export default function AllMovies({
@@ -10,6 +11,8 @@ export default function AllMovies({
   infoMessage,
   setInfoMessage,
   screenParams,
+  bookmarkedMovies,
+  setBookmarkedMovies,
 }) {
   const [cardsNumber, setCardsNumber] = React.useState(
     sessionStorage.getItem('cardsNumber')
@@ -29,9 +32,31 @@ export default function AllMovies({
   const [result, setResult] = React.useState(
     sessionStorage.getItem('resultAllMovies')
       ? JSON.parse(sessionStorage.resultAllMovies)
-      : null
+      : []
   );
-  const [movies, setMovies] = React.useState(null);
+  const [movies, setMovies] = React.useState([]);
+  const [isSearchDisabled, setIsSearchDisabled] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsLoading(true);
+    mainApi
+      .getBookmarkedMovies()
+      .then((res) => {
+        setBookmarkedMovies(res);
+        console.log(res);
+      })
+      .catch((err) => {
+        setInfoMessage({
+          message: err.message,
+          type: 'error',
+        });
+      })
+      .finally(() => setIsLoading(false));
+    setInfoMessage({
+      message: '',
+      type: '',
+    });
+  }, [setBookmarkedMovies, setInfoMessage, setIsLoading]);
 
   React.useEffect(() => {
     sessionStorage.setItem('filterAllMovies', JSON.stringify(filter));
@@ -40,10 +65,30 @@ export default function AllMovies({
 
   function getAllMovies() {
     if (!sessionStorage.getItem('allMovies')) {
-      return moviesApi.getMovies().then((res) => {
-        sessionStorage.setItem('allMovies', JSON.stringify(res));
-        return res;
-      });
+      return moviesApi
+        .getMovies()
+        .then((res) =>
+          res.map((movie) => {
+            return {
+              country: movie.country.toString(),
+              director: movie.director.toString(),
+              duration: Number(movie.duration),
+              year: movie.year.toString(),
+              description: movie.description.toString(),
+              image: IMAGES_URL + movie.image.url.toString(),
+              trailerLink: movie.trailerLink.toString(),
+              thumbnail:
+                IMAGES_URL + movie.image.formats.thumbnail.url.toString(),
+              movieId: Number(movie.id),
+              nameEN: movie.nameEN.toString(),
+              nameRU: movie.nameRU.toString(),
+            };
+          })
+        )
+        .then((res) => {
+          sessionStorage.setItem('allMovies', JSON.stringify(res));
+          return res;
+        });
     }
     return Promise.resolve(JSON.parse(sessionStorage.allMovies));
   }
@@ -82,6 +127,10 @@ export default function AllMovies({
       movies={movies}
       showMore={handleShowMore}
       cardsNumber={cardsNumber}
+      isSearchDisabled={isSearchDisabled}
+      setIsSearchDisabled={setIsSearchDisabled}
+      bookmarkedMovies={bookmarkedMovies}
+      setBookmarkedMovies={setBookmarkedMovies}
     />
   );
 }

@@ -19,6 +19,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = React.useState(null);
+  const [bookmarkedMovies, setBookmarkedMovies] = React.useState(null);
   const [userIsChecking, setUserIsChecking] = React.useState(true);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isLoadingContent, setIsLoadingContent] = React.useState(false);
@@ -40,10 +41,10 @@ function App() {
           const { name, email } = res;
           setUser({ name, email });
         })
-        .catch((err) => setUser(null))
-        .finally((res) => setUserIsChecking(false));
+        .catch(() => setUser(null))
+        .finally(() => setUserIsChecking(false));
     }
-  }, []);
+  }, [user]);
 
   React.useEffect(() => {
     let resizeTimer;
@@ -164,6 +165,8 @@ function App() {
                 infoMessage={infoMessage}
                 setInfoMessage={setInfoMessage}
                 screenParams={screenParams}
+                bookmarkedMovies={bookmarkedMovies}
+                setBookmarkedMovies={setBookmarkedMovies}
               />
             }
           />
@@ -177,6 +180,9 @@ function App() {
                 setIsLoading={setIsLoadingContent}
                 infoMessage={infoMessage}
                 setInfoMessage={setInfoMessage}
+                screenParams={screenParams}
+                bookmarkedMovies={bookmarkedMovies}
+                setBookmarkedMovies={setBookmarkedMovies}
               />
             }
           />

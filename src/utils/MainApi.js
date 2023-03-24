@@ -76,11 +76,11 @@ class MainApi {
   }
 
   // postBookmarkedMovie — /movies post body: owner: user ID + all fields from beats api
-  postBookmarkedMovie(body, userId) {
+  postBookmarkedMovie(body) {
     const url = `${this._baseUrl}/movies`;
     const options = {
       method: 'POST',
-      body: JSON.stringify({ ...body, owner: userId }),
+      body: JSON.stringify(body),
     };
     return this._fetchRequest(url, options);
   }
@@ -88,7 +88,7 @@ class MainApi {
   // deleteBookmarkedMovie — /movies/:id delete
 
   deleteBookmarkedMovie(movieId) {
-    const url = `${this._baseUrl}/${movieId}`;
+    const url = `${this._baseUrl}/movies/${movieId}`;
     const options = {
       method: 'DELETE',
     };

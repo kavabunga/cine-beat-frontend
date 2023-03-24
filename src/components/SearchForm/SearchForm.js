@@ -9,6 +9,7 @@ export default function SearchForm({
   filter,
   setFilter,
   setInfoMessage,
+  isDisabled,
 }) {
   function handleChangeInput(e) {
     setRequest(e.target.value);
@@ -53,7 +54,10 @@ export default function SearchForm({
         />
         <button
           type='submit'
-          className='search-form__submit-button app__button'
+          className={`search-form__submit-button ${
+            isDisabled ? 'search-form__submit-button_disabled' : ''
+          }`}
+          disabled={isDisabled}
         />
       </fieldset>
       <fieldset className='search-form__filter'>

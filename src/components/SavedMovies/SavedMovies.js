@@ -1,81 +1,89 @@
 import React from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { filterOnRequest, filterOnDuration } from '../../utils/helpers';
 import mainApi from '../../utils/MainApi';
 import Movies from '../Movies/Movies';
 
-export default function SavedMovies({ isLoaded }) {
-  const user = React.useContext(UserContext);
-  const [movies, setMovies] = React.useState(null);
-  const [error, setError] = React.useState(null);
+export default function SavedMovies({
+  isLoading,
+  setIsLoading,
+  infoMessage,
+  setInfoMessage,
+  bookmarkedMovies,
+  setBookmarkedMovies,
+}) {
+  const [cardsNumber, setCardsNumber] = React.useState(null);
+  const [movies, setMovies] = React.useState([]);
+  const [request, setRequest] = React.useState('');
+  const [filter, setFilter] = React.useState(true);
+  const [result, setResult] = React.useState([]);
+  const [isSearchDisabled, setIsSearchDisabled] = React.useState(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
     mainApi
       .getBookmarkedMovies()
-      .then((res) => setMovies(res))
-      .catch((err) => setError(err));
-  }, []);
+      .then((res) => {
+        if (res.length > 0) {
+          setBookmarkedMovies(res);
+          setInfoMessage({
+            message: '',
+            type: '',
+          });
+          setCardsNumber(res.length);
+          setResult(res);
+        } else {
+          setBookmarkedMovies([]);
+          setIsSearchDisabled(true);
+          setInfoMessage({
+            message: 'Ничего не найдено. Здесь появятся отмеченные фильмы',
+            type: 'info',
+          });
+        }
+      })
+      .catch((err) => {
+        setInfoMessage({
+          message: err.message,
+          type: 'error',
+        });
+      })
+      .finally(() => setIsLoading(false));
+  }, [setBookmarkedMovies, setInfoMessage, setIsLoading]);
 
-  console.log('SavedMovies movies', movies);
-  const cards = [
-    {
-      _id: '64011727375178fe22e2c03e',
-      duration: 102,
-      image:
-        'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2918&amp;q=80',
-      trailerLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-      thumbnail:
-        'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80',
-      owner: {
-        _id: '64010ca62380ae8f90a18f0a',
-        email: 'test11@test.com',
-        name: 'Квентин Т.',
-        __v: 0,
-      },
-      nameRU: 'Тест два',
-      bookmarked: true,
-    },
-    {
-      _id: '64011727375178fe22e2c02e',
-      duration: 102,
-      image:
-        'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2918&amp;q=80',
-      trailerLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-      thumbnail:
-        'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80',
-      owner: {
-        _id: '64010ca62380ae8f90a18f0a',
-        email: 'test11@test.com',
-        name: 'Квентин Т.',
-        __v: 0,
-      },
-      nameRU: 'Тест три',
-      bookmarked: false,
-    },
+  React.useEffect(() => {
+    result && setMovies(filterOnDuration(filter, result));
+  }, [filter, result]);
 
-    {
-      _id: '64011727375178fe22e2c15e',
-      duration: 102,
-      image:
-        'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2918&amp;q=80',
-      trailerLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-      thumbnail:
-        'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80',
-      owner: {
-        _id: '64010ca62380ae8f90a18f0a',
-        email: 'test11@test.com',
-        name: 'Квентин Т.',
-        __v: 0,
-      },
-      nameRU: 'Тест шесть',
-      bookmarked: false,
-    },
-  ];
+  React.useEffect(() => {
+    request ? handleSearch() : setResult(bookmarkedMovies);
+  }, [bookmarkedMovies]);
+
+  function handleSearch() {
+    return Promise.resolve(filterOnRequest(request, bookmarkedMovies)).then(
+      (res) => {
+        setResult(res);
+        return res;
+      }
+    );
+  }
 
   return (
     <Movies
-      cards={cards}
-      isLoaded={isLoaded}
+      isLoading={isLoading}
+      setIsLoading={setIsLoading}
       buttonType='delete'
+      onSearch={handleSearch}
+      infoMessage={infoMessage}
+      setInfoMessage={setInfoMessage}
+      request={request}
+      setRequest={setRequest}
+      filter={filter}
+      setFilter={setFilter}
+      movies={movies}
+      cardsNumber={cardsNumber}
+      isSearchDisabled={isSearchDisabled}
+      setIsSearchDisabled={setIsSearchDisabled}
+      bookmarkedMovies={bookmarkedMovies}
+      setBookmarkedMovies={setBookmarkedMovies}
     />
   );
 }

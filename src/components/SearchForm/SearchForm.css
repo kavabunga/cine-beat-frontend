@@ -55,6 +55,21 @@
   background-image: url('../../images/search-button-icon.svg');
   background-position: center;
   background-repeat: no-repeat;
+  transition: opacity 0.1s ease, background-color 0.2s ease;
+}
+
+.search-form__submit-button_disabled {
+  background-color: #8b8b8b;
+}
+
+.search-form__submit-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.search-form__submit-button_disabled:hover {
+  opacity: 1;
+  cursor: unset;
 }
 
 .search-form__filter {
