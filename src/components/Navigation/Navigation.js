@@ -57,6 +57,7 @@ export default function Navigation({ isOpen, setIsOpen }) {
       <Link
         className='navigation__link navigation__link_type_profile app__link'
         to='/profile'
+        onClick={() => setIsOpen(false)}
       >
         Аккаунт
       </Link>

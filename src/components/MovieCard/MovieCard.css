@@ -1,6 +1,12 @@
 .movie-card {
   margin: 0;
   padding: 0;
+  min-width: 0;
+  background-color: #222222;
+}
+
+.movie-card__link {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   background-color: #222222;
@@ -8,17 +14,19 @@
 }
 
 .movie-card__container {
+  min-width: 0;
   margin: 0;
   padding: 14px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 32px;
 }
 
 .movie-card__description {
+  flex-grow: 1;
   margin: 0;
   padding: 0;
-  max-width: calc(100% - 30px - 32px);
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -51,7 +59,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .movie-card__description {
-    max-width: calc(100% - 30px - 26px);
+  .movie-card__container {
+    gap: 26px;
   }
 }

@@ -43,13 +43,13 @@ export default function MovieCard({
   }
 
   return (
-    <a
-      href={content.trailerLink}
-      target='_blank'
-      rel='noopener noreferrer'
-      className='app__link'
-    >
-      <li className='movie-card'>
+    <li className='movie-card'>
+      <a
+        href={content.trailerLink}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='movie-card__link app__link'
+      >
         <div className='movie-card__container'>
           <article className='movie-card__description'>
             <h2 className='movie-card__title'>{content.nameRU}</h2>
@@ -76,7 +76,7 @@ export default function MovieCard({
           alt={`Обложка фильма ${content.nameRU}`}
           className='movie-card__image'
         />
-      </li>
-    </a>
+      </a>
+    </li>
   );
 }
