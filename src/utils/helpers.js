@@ -33,7 +33,9 @@ export function filterOnDuration(flag, data) {
     typeof data === 'object' &&
     data.length > 0
   ) {
-    const result = data.filter((movie) => flag || movie.duration > 40);
+    const result = data.filter((movie) =>
+      flag ? movie.duration <= 40 : movie.duration > 40
+    );
     return result;
   } else return null;
 }

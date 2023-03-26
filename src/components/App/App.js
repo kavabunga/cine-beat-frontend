@@ -19,7 +19,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = React.useState({});
-  const [bookmarkedMovies, setBookmarkedMovies] = React.useState([]);
+  const [bookmarkedMovies, setBookmarkedMovies] = React.useState(null);
   const [userIsChecking, setUserIsChecking] = React.useState(true);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isLoadingContent, setIsLoadingContent] = React.useState(false);
@@ -46,10 +46,14 @@ function App() {
   React.useEffect(() => {
     let resizeTimer;
     setScreenParams(checkWindowSize());
-    window.addEventListener('resize', () => {
+    const resize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => setScreenParams(checkWindowSize()), 500);
-    });
+    };
+    window.addEventListener('resize', resize);
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
   function checkWindowSize() {

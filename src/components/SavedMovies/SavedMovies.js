@@ -20,11 +20,9 @@ export default function SavedMovies({
 
   React.useEffect(() => {
     setIsLoading(true);
-    mainApi
-      .getBookmarkedMovies()
+    getMovies()
       .then((res) => {
         if (res.length > 0) {
-          setBookmarkedMovies(res);
           setInfoMessage({
             message: '',
             type: '',
@@ -32,7 +30,6 @@ export default function SavedMovies({
           setCardsNumber(res.length);
           setResult(res);
         } else {
-          setBookmarkedMovies([]);
           setIsSearchDisabled(true);
           setInfoMessage({
             message: 'Ничего не найдено. Здесь появятся отмеченные фильмы',
@@ -56,6 +53,17 @@ export default function SavedMovies({
   React.useEffect(() => {
     request ? handleSearch() : setResult(bookmarkedMovies);
   }, [bookmarkedMovies]);
+
+  function getMovies() {
+    if (!bookmarkedMovies) {
+      mainApi.getBookmarkedMovies().then((res) => {
+        setBookmarkedMovies(res);
+        return res;
+      });
+    } else {
+      return Promise.resolve(bookmarkedMovies);
+    }
+  }
 
   function handleSearch() {
     return Promise.resolve(filterOnRequest(request, bookmarkedMovies)).then(

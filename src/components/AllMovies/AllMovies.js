@@ -38,19 +38,21 @@ export default function AllMovies({
   const [isSearchDisabled, setIsSearchDisabled] = React.useState(false);
 
   React.useEffect(() => {
-    setIsLoading(true);
-    mainApi
-      .getBookmarkedMovies()
-      .then((res) => {
-        setBookmarkedMovies(res);
-      })
-      .catch((err) => {
-        setInfoMessage({
-          message: err.message,
-          type: 'error',
-        });
-      })
-      .finally(() => setIsLoading(false));
+    if (!bookmarkedMovies) {
+      setIsLoading(true);
+      mainApi
+        .getBookmarkedMovies()
+        .then((res) => {
+          setBookmarkedMovies(res);
+        })
+        .catch((err) => {
+          setInfoMessage({
+            message: err.message,
+            type: 'error',
+          });
+        })
+        .finally(() => setIsLoading(false));
+    }
     setInfoMessage({
       message: '',
       type: '',
