@@ -44,7 +44,7 @@ export default function SavedMovies({
         });
       })
       .finally(() => setIsLoading(false));
-  }, [setBookmarkedMovies, setInfoMessage, setIsLoading]);
+  }, [setInfoMessage, setIsLoading]);
 
   React.useEffect(() => {
     result && setMovies(filterOnDuration(filter, result));
@@ -56,13 +56,12 @@ export default function SavedMovies({
 
   function getMovies() {
     if (!bookmarkedMovies) {
-      mainApi.getBookmarkedMovies().then((res) => {
+      return mainApi.getBookmarkedMovies().then((res) => {
         setBookmarkedMovies(res);
         return res;
       });
-    } else {
-      return Promise.resolve(bookmarkedMovies);
     }
+    return Promise.resolve(bookmarkedMovies);
   }
 
   function handleSearch() {
