@@ -32,7 +32,6 @@ export default function MovieCard({
     } else {
       unBookmark(content)
         .catch((err) => {
-          console.log(err);
           setInfoMessage({
             message: err.message,
             type: 'error',

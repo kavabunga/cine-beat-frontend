@@ -20,8 +20,8 @@ export default function CredentialsScreen({
 
   React.useEffect(() => {
     setInfoMessage({
-      message: null,
-      type: null,
+      message: '',
+      type: '',
     });
   }, [setInfoMessage]);
 
@@ -34,8 +34,8 @@ export default function CredentialsScreen({
     handleChange(e);
     infoMessage &&
       setInfoMessage({
-        message: null,
-        type: null,
+        message: '',
+        type: '',
       });
   }
 

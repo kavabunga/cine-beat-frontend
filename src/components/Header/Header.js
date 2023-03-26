@@ -13,8 +13,8 @@ export default function Header() {
   return (
     <header className='header'>
       <Logo />
-      {user && <Hamburger setIsOpen={setIsOpen} />}
-      {user ? (
+      {user && user.email && <Hamburger setIsOpen={setIsOpen} />}
+      {user && user.email ? (
         <Navigation
           isOpen={isOpen}
           setIsOpen={setIsOpen}

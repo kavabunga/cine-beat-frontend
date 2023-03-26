@@ -11,7 +11,7 @@ export default function ProtectedRouteElement({
 
   return props.isChecking ? (
     <Preloader />
-  ) : user ? (
+  ) : user && user.email ? (
     <Component {...props} />
   ) : (
     <Navigate

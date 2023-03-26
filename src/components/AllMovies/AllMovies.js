@@ -43,7 +43,6 @@ export default function AllMovies({
       .getBookmarkedMovies()
       .then((res) => {
         setBookmarkedMovies(res);
-        console.log(res);
       })
       .catch((err) => {
         setInfoMessage({

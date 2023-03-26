@@ -14,15 +14,15 @@ export default function SearchForm({
   function handleChangeInput(e) {
     setRequest(e.target.value);
     setInfoMessage({
-      message: null,
-      type: null,
+      message: '',
+      type: '',
     });
   }
   function handleChangeCheckbox(e) {
     setFilter(e.target.checked);
     setInfoMessage({
-      message: null,
-      type: null,
+      message: '',
+      type: '',
     });
   }
 

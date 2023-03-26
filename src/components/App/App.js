@@ -18,33 +18,30 @@ import './App.css';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [user, setUser] = React.useState(null);
-  const [bookmarkedMovies, setBookmarkedMovies] = React.useState(null);
+  const [user, setUser] = React.useState({});
+  const [bookmarkedMovies, setBookmarkedMovies] = React.useState([]);
   const [userIsChecking, setUserIsChecking] = React.useState(true);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isLoadingContent, setIsLoadingContent] = React.useState(false);
   const [infoMessage, setInfoMessage] = React.useState({
-    message: null,
-    type: null,
+    message: '',
+    type: '',
   });
-  const [screenParams, setScreenParams] = React.useState(null);
+  const [screenParams, setScreenParams] = React.useState({});
 
   const headerShowForPaths = ['/', '/movies', '/saved-movies', '/profile'];
   const footerShowForPaths = ['/', '/movies', '/saved-movies'];
 
   React.useEffect(() => {
-    if (!user) {
+    if (user && !user.email) {
       setUserIsChecking(true);
       mainApi
         .getUser()
-        .then((res) => {
-          const { name, email } = res;
-          setUser({ name, email });
-        })
-        .catch(() => setUser(null))
+        .then(({ name, email }) => setUser({ name, email }))
+        .catch((err) => console.log(err.message))
         .finally(() => setUserIsChecking(false));
     }
-  }, [user]);
+  }, []);
 
   React.useEffect(() => {
     let resizeTimer;
@@ -73,8 +70,8 @@ function App() {
         const { name, email } = res;
         setUser({ name, email });
         setInfoMessage({
-          message: null,
-          type: null,
+          message: '',
+          type: '',
         });
       })
       .then(() => navigate('/movies'))
@@ -107,12 +104,12 @@ function App() {
     setIsSubmitting(true);
     mainApi
       .signOut()
-      .then((res) => {
+      .then(() => {
         setInfoMessage({
-          message: null,
-          type: null,
+          message: '',
+          type: '',
         });
-        setUser(null);
+        setUser({});
       })
       .then((res) => navigate('/'))
       .catch((err) => {

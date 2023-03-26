@@ -16,21 +16,21 @@ export default function Profile({
 
   React.useEffect(() => {
     setInfoMessage({
-      message: null,
-      type: null,
+      message: '',
+      type: '',
     });
   }, [setInfoMessage]);
 
   React.useEffect(() => {
-    user !== null && setValues(user);
+    user && user.email && setValues(user);
   }, [user, setValues]);
 
   function handleFieldChange(e) {
     handleChange(e);
     infoMessage &&
       setInfoMessage({
-        message: null,
-        type: null,
+        message: '',
+        type: '',
       });
   }
 
@@ -41,7 +41,9 @@ export default function Profile({
 
   return (
     <main className='profile'>
-      <h1 className='profile__title'>Привет{user ? ', ' + user.name : ''}!</h1>
+      <h1 className='profile__title'>
+        Привет{user.name ? ', ' + user.name : ''}!
+      </h1>
       <form
         onSubmit={handleSubmit}
         className='profile__form'
@@ -51,7 +53,7 @@ export default function Profile({
             Имя
             <input
               type='text'
-              value={values.name}
+              value={values.name || ''}
               name='name'
               pattern='[- А-Яа-яA-Za-zё]+$'
               required
@@ -66,7 +68,7 @@ export default function Profile({
             E-mail
             <input
               type='email'
-              value={values.email}
+              value={values.email || ''}
               name='email'
               required
               onChange={handleFieldChange}
