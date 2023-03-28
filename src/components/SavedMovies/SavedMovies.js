@@ -14,7 +14,7 @@ export default function SavedMovies({
   const [cardsNumber, setCardsNumber] = React.useState(null);
   const [movies, setMovies] = React.useState([]);
   const [request, setRequest] = React.useState('');
-  const [filter, setFilter] = React.useState(true);
+  const [filter, setFilter] = React.useState(false);
   const [result, setResult] = React.useState([]);
   const [isSearchDisabled, setIsSearchDisabled] = React.useState(false);
 

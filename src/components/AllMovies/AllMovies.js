@@ -39,6 +39,11 @@ export default function AllMovies({
 
   React.useEffect(() => {
     if (!bookmarkedMovies) {
+      setInfoMessage({
+        message:
+          'В этом разделе можно искать фильмы из каталога Beat Film Festival и добавлять их в закладки. Введите запрос и запустите поиск',
+        type: 'info',
+      });
       setIsLoading(true);
       mainApi
         .getBookmarkedMovies()
@@ -52,11 +57,12 @@ export default function AllMovies({
           });
         })
         .finally(() => setIsLoading(false));
+    } else {
+      setInfoMessage({
+        message: '',
+        type: '',
+      });
     }
-    setInfoMessage({
-      message: '',
-      type: '',
-    });
   }, [setBookmarkedMovies, setInfoMessage, setIsLoading]);
 
   React.useEffect(() => {

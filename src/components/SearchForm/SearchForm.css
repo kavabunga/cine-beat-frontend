@@ -25,6 +25,7 @@
   padding: 7px 0;
   flex-grow: 1;
   border: none;
+  border-radius: 0;
   background: transparent;
   font-family: inherit;
   font-weight: 400;
