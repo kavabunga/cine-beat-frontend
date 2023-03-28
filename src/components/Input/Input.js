@@ -5,6 +5,7 @@ export default function Input({
   value,
   name,
   type,
+  pattern,
   onChange,
   errorMessage,
 }) {
@@ -15,6 +16,7 @@ export default function Input({
         type={type}
         value={value}
         name={name}
+        pattern={pattern}
         required
         onChange={onChange}
         className={`input__field ${errorMessage ? 'input__field_error' : ''}`}

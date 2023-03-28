@@ -1,22 +1,49 @@
 import React from 'react';
-import ApiError from '../ApiError/ApiError';
+import { UserContext } from '../../contexts/UserContext';
+import useForm from '../../utils/useForm';
+import ApiInfo from '../ApiInfo/ApiInfo';
 import './Profile.css';
 
-export default function Profile({ user, onSubmit }) {
-  const [input, setInput] = React.useState(user);
+export default function Profile({
+  onSubmit,
+  isSubmitting,
+  onSignout,
+  infoMessage,
+  setInfoMessage,
+}) {
+  const user = React.useContext(UserContext);
+  const { values, handleChange, errors, isValid, setValues } = useForm();
 
-  function handleChangeInput(e) {
-    setInput({ ...input, [e.target.name]: e.target.value });
+  React.useEffect(() => {
+    setInfoMessage({
+      message: '',
+      type: '',
+    });
+  }, [setInfoMessage]);
+
+  React.useEffect(() => {
+    user && user.email && setValues(user);
+  }, [user, setValues]);
+
+  function handleFieldChange(e) {
+    handleChange(e);
+    infoMessage &&
+      setInfoMessage({
+        message: '',
+        type: '',
+      });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(input);
+    onSubmit(values);
   }
 
   return (
     <main className='profile'>
-      <h1 className='profile__title'>Привет, {user.name}!</h1>
+      <h1 className='profile__title'>
+        Привет{user.name ? ', ' + user.name : ''}!
+      </h1>
       <form
         onSubmit={handleSubmit}
         className='profile__form'
@@ -26,36 +53,65 @@ export default function Profile({ user, onSubmit }) {
             Имя
             <input
               type='text'
-              value={input.name}
+              value={values.name || ''}
               name='name'
+              pattern='[- А-Яа-яA-Za-zё]+$'
               required
-              onChange={handleChangeInput}
-              className='profile__input'
+              onChange={handleFieldChange}
+              className={`profile__input ${
+                errors.name ? 'profile__input_error' : ''
+              }`}
             />
           </label>
 
           <label className='profile__label'>
             E-mail
             <input
-              type='text'
-              value={input.email}
+              type='email'
+              value={values.email || ''}
               name='email'
               required
-              onChange={handleChangeInput}
-              className='profile__input'
+              onChange={handleFieldChange}
+              className={`profile__input ${
+                errors.email ? 'profile__input_error' : ''
+              }`}
             />
           </label>
+          {errors.name && (
+            <span className='profile__error'>
+              Ошибка в имени. {errors.name}
+            </span>
+          )}
+          {errors.email && (
+            <span className='profile__error'>
+              Ошибка в почте. {errors.email}
+            </span>
+          )}
         </fieldset>
-        <ApiError message='' />
+        <ApiInfo
+          message={infoMessage.message}
+          type={infoMessage.type}
+        />
         <button
-          className='profile__button profile__button_active app__button'
+          className={`profile__button ${
+            !isSubmitting &&
+            isValid &&
+            (values.name !== user.name || values.email !== user.email) &&
+            'profile__button_active'
+          }`}
           type='submit'
+          disabled={
+            isSubmitting ||
+            !isValid ||
+            !(values.name !== user.name || values.email !== user.email)
+          }
         >
-          Редактировать
+          {isSubmitting ? 'Запрос отправляется' : 'Редактировать'}
         </button>
         <button
           className='profile__button profile__button_type_logout app__button'
           type='button'
+          onClick={onSignout}
         >
           Выйти из аккаунта
         </button>

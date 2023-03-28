@@ -1,29 +1,42 @@
 import React from 'react';
+import useForm from '../../utils/useForm';
 import Logo from '../Logo/Logo';
 import Input from '../Input/Input';
 import './CredentialsScreen.css';
-import ApiError from '../ApiError/ApiError';
+import ApiInfo from '../ApiInfo/ApiInfo';
 import { Link } from 'react-router-dom';
 
 export default function CredentialsScreen({
   title,
   submitButtonText,
+  onSubmit,
+  isSubmitting,
+  infoMessage,
+  setInfoMessage,
   extra,
   inputs,
 }) {
-  const [credentials, setCredentials] = React.useState(null);
+  const { values, handleChange, errors, isValid } = useForm();
+
+  React.useEffect(() => {
+    setInfoMessage({
+      message: '',
+      type: '',
+    });
+  }, [setInfoMessage]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submit: ', credentials);
+    onSubmit(values);
   }
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setCredentials({
-      ...credentials,
-      [name]: value,
-    });
+  function handleFieldChange(e) {
+    handleChange(e);
+    infoMessage &&
+      setInfoMessage({
+        message: '',
+        type: '',
+      });
   }
 
   return (
@@ -35,31 +48,37 @@ export default function CredentialsScreen({
       <form
         onSubmit={handleSubmit}
         className='credentials-screen__form'
+        noValidate
       >
         <fieldset className='credentials-screen__inputs'>
           {inputs &&
             inputs.map((input) => (
               <Input
                 label={input.label}
-                value={
-                  credentials && credentials[input.name]
-                    ? credentials[input.name]
-                    : ''
-                }
+                value={values && values[input.name] ? values[input.name] : ''}
                 name={input.name}
                 type={input.type}
-                onChange={handleChange}
-                errorMessage={input.errorMessage}
+                pattern={input.pattern}
+                onChange={handleFieldChange}
+                errorMessage={errors[input.name]}
                 key={input.name}
               />
             ))}
         </fieldset>
-        <ApiError message='' />
+        <ApiInfo
+          message={infoMessage.message}
+          type={infoMessage.type}
+        />
         <button
-          className='credentials-screen__submit-button credentials-screen__submit-button_active app__button'
+          className={`credentials-screen__submit-button ${
+            !isSubmitting &&
+            isValid &&
+            'credentials-screen__submit-button_active'
+          }`}
           type='submit'
+          disabled={isSubmitting || !isValid}
         >
-          {submitButtonText}
+          {isSubmitting ? 'Запрос отправляется' : submitButtonText}
         </button>
       </form>
       <p className='credentials-screen__extra'>
