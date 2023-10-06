@@ -1,4 +1,4 @@
-# :popcorn: Movie Explorer (front-end) • ![Status in progress](https://badgen.net/badge/status/in%20progress/yellow)
+# :popcorn: Movie Explorer (front-end) • ![Status finished](https://badgen.net/badge/status/finished/green)
 
 Front-end for the project **Movie Explorer** — web-application for keeping a personal movie collection.
 
@@ -25,8 +25,4 @@ Figma layout file: [Diploma.fig.zip](https://disk.yandex.ru/d/15n69BDswF2GrA)
 
 ## Address
 
-[https://quentin.nomoredomains.work](https://quentin.nomoredomains.work)
-
-## PR link
-
-[https://github.com/kavabunga/movies-explorer-frontend/pull/2](https://github.com/kavabunga/movies-explorer-frontend/pull/2)
+Currently not deployed
