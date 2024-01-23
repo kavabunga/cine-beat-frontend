@@ -2,6 +2,8 @@
 
 ![Static Badge](https://img.shields.io/badge/status-finished-success) ![Static Badge](https://img.shields.io/badge/JavaScript-gray?logo=JavaScript) ![Static Badge](https://img.shields.io/badge/CSS-gray?logo=CSS3) ![Static Badge](https://img.shields.io/badge/BEM-gray?logo=BEM) ![Static Badge](https://img.shields.io/badge/React-gray?logo=React) ![Static Badge](https://img.shields.io/badge/React_Router-gray?logo=reactrouter)
 
+![Jan-23-2024 22-06-30](https://github.com/kavabunga/cine-beat-frontend/assets/5512536/912b7435-b892-4022-b096-97880ceb3675)
+
 Front-end React application for the project **Cine Beat** — service for keeping a personal movie collection of the Beat Film Festival catalogue. The project made at **"WEB-development"** course at [**Yandex.Practicum**](https://practicum.yandex.ru/ 'Yandex.Practicum'). Demo is available here: [cinebeat.semenkatz.com](https://cinebeat.semenkatz.com)
 
 ## Features
