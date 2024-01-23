@@ -9,10 +9,10 @@ export default function SignUp({
 }) {
   const inputs = [
     {
-      label: 'Имя',
+      label: 'Name',
       name: 'name',
       type: 'text',
-      pattern: '[- А-Яа-яA-Za-zё]+$',
+      pattern: '^[А-ЯЁа-яёA-Za-z]+$',
     },
     {
       label: 'E-mail',
@@ -20,22 +20,22 @@ export default function SignUp({
       type: 'email',
     },
     {
-      label: 'Пароль',
+      label: 'Password',
       name: 'password',
       type: 'password',
     },
   ];
 
   const extra = {
-    text: 'Уже зарегистрированы?',
-    name: 'Войти',
+    text: 'Already registered?',
+    name: 'Sign in',
     link: '/signin',
   };
 
   return (
     <CredentialsScreen
-      title='Добро пожаловать!'
-      submitButtonText='Зарегистрироваться'
+      title='Welcome!'
+      submitButtonText='Sign up'
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
       infoMessage={infoMessage}

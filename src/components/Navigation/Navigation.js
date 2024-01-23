@@ -22,7 +22,7 @@ export default function Navigation({ isOpen, setIsOpen }) {
             onClick={() => setIsOpen(false)}
             end
           >
-            Главная
+            Home
           </NavLink>
         </li>
         <li className='navigation__element'>
@@ -36,7 +36,7 @@ export default function Navigation({ isOpen, setIsOpen }) {
             onClick={() => setIsOpen(false)}
             end
           >
-            Фильмы
+            Movies
           </NavLink>
         </li>
         <li className='navigation__element'>
@@ -50,7 +50,7 @@ export default function Navigation({ isOpen, setIsOpen }) {
             onClick={() => setIsOpen(false)}
             end
           >
-            Сохраненные фильмы
+            Saved movies
           </NavLink>
         </li>
       </ul>
@@ -59,7 +59,7 @@ export default function Navigation({ isOpen, setIsOpen }) {
         to='/profile'
         onClick={() => setIsOpen(false)}
       >
-        Аккаунт
+        Profile
       </Link>
     </nav>
   );

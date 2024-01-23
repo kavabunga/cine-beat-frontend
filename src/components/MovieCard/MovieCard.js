@@ -13,7 +13,7 @@ export default function MovieCard({
   setInfoMessage,
 }) {
   const isBookmarked = bookmarkedMovies.some(
-    (e) => e.movieId === content.movieId
+    (e) => e.movieId === content.movieId,
   );
   const [isCardButtonDisabled, setIsCardButtonDisabled] = React.useState(false);
 
@@ -51,7 +51,7 @@ export default function MovieCard({
       >
         <div className='movie-card__container'>
           <article className='movie-card__description'>
-            <h2 className='movie-card__title'>{content.nameRU}</h2>
+            <h2 className='movie-card__title'>{content.nameEN}</h2>
             <p className='movie-card__duration'>
               {calculateDuration(content.duration)}
             </p>
@@ -72,7 +72,7 @@ export default function MovieCard({
         </div>
         <img
           src={content.image}
-          alt={`Обложка фильма ${content.nameRU}`}
+          alt={`Cover of the movie ${content.nameEN}`}
           className='movie-card__image'
         />
       </a>

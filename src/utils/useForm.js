@@ -20,7 +20,7 @@ export default function useForm() {
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid]
+    [setValues, setErrors, setIsValid],
   );
 
   return { values, handleChange, errors, isValid, resetForm, setValues };

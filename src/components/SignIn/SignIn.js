@@ -14,22 +14,22 @@ export default function SignIn({
       type: 'email',
     },
     {
-      label: 'Пароль',
+      label: 'Password',
       name: 'password',
       type: 'password',
     },
   ];
 
   const extra = {
-    text: 'Ещё не зарегистрированы?',
-    name: 'Регистрация',
+    text: 'Not yet registered?',
+    name: 'Sign up',
     link: '/signup',
   };
 
   return (
     <CredentialsScreen
-      title='Рады видеть!'
-      submitButtonText='Войти'
+      title='Hey there!'
+      submitButtonText='Sign in'
       onSubmit={onSubmit}
       isSubmitting={isSubmitting}
       infoMessage={infoMessage}

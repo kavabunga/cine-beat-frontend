@@ -21,7 +21,10 @@
   opacity: 1;
   border: none;
   border-radius: 20px;
-  transition: background-color 0.3s ease, padding 0.3s ease, opacity 0.1s ease;
+  transition:
+    background-color 0.3s ease,
+    padding 0.3s ease,
+    opacity 0.1s ease;
 }
 
 .filter-checkbox__visible-checkbox:hover {

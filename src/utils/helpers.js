@@ -1,10 +1,10 @@
 export function calculateDuration(minutes) {
   if (typeof minutes == 'number') {
     return (
-      (minutes >= 60 ? Math.floor(minutes / 60).toString() + 'ч' : '') +
-      (minutes % 60 !== 0 ? ' ' + (minutes % 60).toString() + 'м' : '')
+      (minutes >= 60 ? Math.floor(minutes / 60).toString() + 'h' : '') +
+      (minutes % 60 !== 0 ? ' ' + (minutes % 60).toString() + 'm' : '')
     );
-  } else return 'Неизвестно';
+  } else return 'Unknown';
 }
 
 export function filterOnRequest(request, data) {
@@ -21,7 +21,7 @@ export function filterOnRequest(request, data) {
         movie.director.toLowerCase().includes(val) ||
         movie.nameEN.toLowerCase().includes(val) ||
         movie.nameRU.toLowerCase().includes(val) ||
-        movie.year.toLowerCase().includes(val)
+        movie.year.toLowerCase().includes(val),
     );
     return result;
   } else return null;
@@ -34,7 +34,7 @@ export function filterOnDuration(flag, data) {
     data.length > 0
   ) {
     const result = data.filter((movie) =>
-      flag ? movie.duration <= 40 : movie.duration > 40
+      flag ? movie.duration <= 40 : movie.duration > 40,
     );
     return result;
   } else return null;

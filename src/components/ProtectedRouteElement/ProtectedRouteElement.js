@@ -14,9 +14,6 @@ export default function ProtectedRouteElement({
   ) : user && user.email ? (
     <Component {...props} />
   ) : (
-    <Navigate
-      to='/'
-      replace
-    />
+    <Navigate to='/' replace />
   );
 }

@@ -42,20 +42,17 @@ export default function Profile({
   return (
     <main className='profile'>
       <h1 className='profile__title'>
-        Привет{user.name ? ', ' + user.name : ''}!
+        Hey{user.name ? ', ' + user.name : ''}!
       </h1>
-      <form
-        onSubmit={handleSubmit}
-        className='profile__form'
-      >
+      <form onSubmit={handleSubmit} className='profile__form'>
         <fieldset className='profile__inputs'>
           <label className='profile__label'>
-            Имя
+            Name
             <input
               type='text'
               value={values.name || ''}
               name='name'
-              pattern='[- А-Яа-яA-Za-zё]+$'
+              pattern='[А-Яа-яA-Za-zёЁ]+$'
               required
               onChange={handleFieldChange}
               className={`profile__input ${
@@ -65,7 +62,7 @@ export default function Profile({
           </label>
 
           <label className='profile__label'>
-            E-mail
+            Email
             <input
               type='email'
               value={values.email || ''}
@@ -78,20 +75,15 @@ export default function Profile({
             />
           </label>
           {errors.name && (
-            <span className='profile__error'>
-              Ошибка в имени. {errors.name}
-            </span>
+            <span className='profile__error'>Error in name. {errors.name}</span>
           )}
           {errors.email && (
             <span className='profile__error'>
-              Ошибка в почте. {errors.email}
+              Error in email. {errors.email}
             </span>
           )}
         </fieldset>
-        <ApiInfo
-          message={infoMessage.message}
-          type={infoMessage.type}
-        />
+        <ApiInfo message={infoMessage.message} type={infoMessage.type} />
         <button
           className={`profile__button ${
             !isSubmitting &&
@@ -106,14 +98,14 @@ export default function Profile({
             !(values.name !== user.name || values.email !== user.email)
           }
         >
-          {isSubmitting ? 'Запрос отправляется' : 'Редактировать'}
+          {isSubmitting ? 'Processing...' : 'Edit'}
         </button>
         <button
           className='profile__button profile__button_type_logout app__button'
           type='button'
           onClick={onSignout}
         >
-          Выйти из аккаунта
+          Logout
         </button>
       </form>
     </main>

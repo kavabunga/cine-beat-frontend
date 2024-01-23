@@ -4,9 +4,7 @@ import './Footer.css';
 export default function Footer() {
   return (
     <footer className='footer'>
-      <p className='footer__text'>
-        Учебный проект Яндекс.Практикум х BeatFilm.
-      </p>
+      <p className='footer__text'>Study project Yandex.Practicum х BeatFilm.</p>
       <div className='footer__bottom-container'>
         <ul className='footer__list'>
           <li className='footer__element'>
@@ -16,7 +14,7 @@ export default function Footer() {
               target='_blank'
               rel='noopener noreferrer'
             >
-              Яндекс.Практикум
+              Yandex.Practicum
             </a>
           </li>
           <li className='footer__element'>

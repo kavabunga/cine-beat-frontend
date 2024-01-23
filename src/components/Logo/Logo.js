@@ -5,15 +5,8 @@ import './Logo.css';
 
 export default function Logo() {
   return (
-    <Link
-      className='logo app__link'
-      to='/'
-    >
-      <img
-        className='logo__icon'
-        src={logoPath}
-        alt='Логотип проекта'
-      />
+    <Link className='logo app__link' to='/'>
+      <img className='logo__icon' src={logoPath} alt='Logotype' />
     </Link>
   );
 }

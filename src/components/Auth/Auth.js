@@ -6,11 +6,8 @@ export default function Auth() {
   return (
     <ul className='auth'>
       <li className='auth__element'>
-        <Link
-          className='auth__link app__link'
-          to='/signup'
-        >
-          Регистрация
+        <Link className='auth__link app__link' to='/signup'>
+          Sign up
         </Link>
       </li>
       <li className='auth__element'>
@@ -18,7 +15,7 @@ export default function Auth() {
           className='auth__link auth__link_type_login app__link'
           to='/signin'
         >
-          Войти
+          Sign in
         </Link>
       </li>
     </ul>

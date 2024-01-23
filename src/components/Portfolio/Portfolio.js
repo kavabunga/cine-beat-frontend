@@ -4,7 +4,7 @@ import './Portfolio.css';
 export default function Portfolio() {
   return (
     <section className='portfolio'>
-      <h2 className='portfolio__title'>Портфолио</h2>
+      <h2 className='portfolio__title'>Portfolio</h2>
       <ul className='portfolio__list'>
         <li className='portfolio__element'>
           <a
@@ -13,7 +13,7 @@ export default function Portfolio() {
             rel='noopener noreferrer'
             className='portfolio__link app__link'
           >
-            Статичный сайт
+            Static website
             <span className='portfolio__icon'>↗</span>
           </a>
         </li>
@@ -24,18 +24,18 @@ export default function Portfolio() {
             rel='noopener noreferrer'
             className='portfolio__link app__link'
           >
-            Адаптивный сайт
+            Adaptive website
             <span className='portfolio__icon'>↗</span>
           </a>
         </li>
         <li className='portfolio__element'>
           <a
-            href='https://kavabunga.github.io/mesto/'
+            href='https://igoplaces.semenkatz.com'
             target='_blank'
             rel='noopener noreferrer'
             className='portfolio__link app__link'
           >
-            Одностраничное приложение
+            SPA
             <span className='portfolio__icon'>↗</span>
           </a>
         </li>

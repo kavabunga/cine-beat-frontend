@@ -15,24 +15,16 @@ export default function AllMovies({
   setBookmarkedMovies,
 }) {
   const [cardsNumber, setCardsNumber] = React.useState(
-    sessionStorage.getItem('cardsNumber')
-      ? Number(sessionStorage.cardsNumber)
-      : screenParams.init
+    sessionStorage.getItem('cardsNumber') ? Number(sessionStorage.cardsNumber) : screenParams.init,
   );
   const [request, setRequest] = React.useState(
-    sessionStorage.getItem('requestAllMovies')
-      ? sessionStorage.requestAllMovies
-      : ''
+    sessionStorage.getItem('requestAllMovies') ? sessionStorage.requestAllMovies : '',
   );
   const [filter, setFilter] = React.useState(
-    sessionStorage.getItem('filterAllMovies')
-      ? JSON.parse(sessionStorage.filterAllMovies)
-      : false
+    sessionStorage.getItem('filterAllMovies') ? JSON.parse(sessionStorage.filterAllMovies) : false,
   );
   const [result, setResult] = React.useState(
-    sessionStorage.getItem('resultAllMovies')
-      ? JSON.parse(sessionStorage.resultAllMovies)
-      : []
+    sessionStorage.getItem('resultAllMovies') ? JSON.parse(sessionStorage.resultAllMovies) : [],
   );
   const [movies, setMovies] = React.useState([]);
   const [isSearchDisabled, setIsSearchDisabled] = React.useState(false);
@@ -41,7 +33,7 @@ export default function AllMovies({
     if (!bookmarkedMovies) {
       setInfoMessage({
         message:
-          'В этом разделе можно искать фильмы из каталога Beat Film Festival и добавлять их в закладки. Введите запрос и запустите поиск',
+          'In this section you can search for films from the Beat Film Festival catalog and add them to your bookmarks. Enter your query and start searching',
         type: 'info',
       });
       setIsLoading(true);
@@ -63,6 +55,7 @@ export default function AllMovies({
         type: '',
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setBookmarkedMovies, setInfoMessage, setIsLoading]);
 
   React.useEffect(() => {
@@ -84,13 +77,12 @@ export default function AllMovies({
               description: movie.description.toString(),
               image: IMAGES_URL + movie.image.url.toString(),
               trailerLink: movie.trailerLink.toString(),
-              thumbnail:
-                IMAGES_URL + movie.image.formats.thumbnail.url.toString(),
+              thumbnail: IMAGES_URL + movie.image.formats.thumbnail.url.toString(),
               movieId: Number(movie.id),
               nameEN: movie.nameEN.toString(),
               nameRU: movie.nameRU.toString(),
             };
-          })
+          }),
         )
         .then((res) => {
           sessionStorage.setItem('allMovies', JSON.stringify(res));
@@ -123,7 +115,7 @@ export default function AllMovies({
     <Movies
       isLoading={isLoading}
       setIsLoading={setIsLoading}
-      buttonType='bookmark'
+      buttonType="bookmark"
       onSearch={handleSearch}
       infoMessage={infoMessage}
       setInfoMessage={setInfoMessage}

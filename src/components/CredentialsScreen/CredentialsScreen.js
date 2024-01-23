@@ -65,10 +65,7 @@ export default function CredentialsScreen({
               />
             ))}
         </fieldset>
-        <ApiInfo
-          message={infoMessage.message}
-          type={infoMessage.type}
-        />
+        <ApiInfo message={infoMessage.message} type={infoMessage.type} />
         <button
           className={`credentials-screen__submit-button ${
             !isSubmitting &&
@@ -78,7 +75,7 @@ export default function CredentialsScreen({
           type='submit'
           disabled={isSubmitting || !isValid}
         >
-          {isSubmitting ? 'Запрос отправляется' : submitButtonText}
+          {isSubmitting ? 'Processing...' : submitButtonText}
         </button>
       </form>
       <p className='credentials-screen__extra'>

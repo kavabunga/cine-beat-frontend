@@ -31,24 +31,20 @@ export default function SearchForm({
     request
       ? onSubmit()
       : setInfoMessage({
-          message: 'Нужно ввести ключевое слово',
+          message: 'You need to enter a keyword',
           type: 'error',
         });
   }
 
   return (
-    <form
-      className='search-form'
-      onSubmit={handleSubmit}
-      noValidate
-    >
+    <form className='search-form' onSubmit={handleSubmit} noValidate>
       <fieldset className='search-form__search'>
         <input
           className='search-form__input'
           value={request}
           name='text'
           type='text'
-          placeholder='Фильм'
+          placeholder='Movie'
           required
           onChange={handleChangeInput}
         />
@@ -66,7 +62,7 @@ export default function SearchForm({
           onCheck={handleChangeCheckbox}
           name='filterShorts'
         />
-        <label className='search-form__filter-name'>Короткометражки</label>
+        <label className='search-form__filter-name'>Shorts</label>
       </fieldset>
     </form>
   );

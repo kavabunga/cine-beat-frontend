@@ -15,10 +15,7 @@ export default function Header() {
       <Logo />
       {user && user.email && <Hamburger setIsOpen={setIsOpen} />}
       {user && user.email ? (
-        <Navigation
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
+        <Navigation isOpen={isOpen} setIsOpen={setIsOpen} />
       ) : (
         <Auth />
       )}

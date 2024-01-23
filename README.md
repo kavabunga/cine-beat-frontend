@@ -1,28 +1,53 @@
-# :popcorn: Movie Explorer (front-end) • ![Status finished](https://badgen.net/badge/status/finished/green)
+# Cine Beat • frontend
 
-Front-end for the project **Movie Explorer** — web-application for keeping a personal movie collection.
+![Static Badge](https://img.shields.io/badge/status-finished-success) ![Static Badge](https://img.shields.io/badge/JavaScript-gray?logo=JavaScript) ![Static Badge](https://img.shields.io/badge/CSS-gray?logo=CSS3) ![Static Badge](https://img.shields.io/badge/BEM-gray?logo=BEM) ![Static Badge](https://img.shields.io/badge/React-gray?logo=React) ![Static Badge](https://img.shields.io/badge/React_Router-gray?logo=reactrouter)
 
-## Technology
-
-- **HTML**
-- **CSS**
-- **JavaScript**
-- [**React.js**](https://reactjs.org 'React.js')
+Front-end React application for the project **Cine Beat** — service for keeping a personal movie collection of the Beat Film Festival catalogue. The project made at **"WEB-development"** course at [**Yandex.Practicum**](https://practicum.yandex.ru/ 'Yandex.Practicum'). Demo is available here: [cinebeat.semenkatz.com](https://cinebeat.semenkatz.com)
 
 ## Features
 
-- landing with information about me;
+- landing page with information about the author ant the project;
 - user authorization;
 - authentication via **JWT** stored safely in httpOnly cookies;
 - editing user profile data;
-- bookmarking and deleting movies;
+- searching and filtering movies;
+- managing bookmarked movies;
 - form validation;
 - errors handling.
 
-## Layout
+## Project structure and setup
 
-Figma layout file: [Diploma.fig.zip](https://disk.yandex.ru/d/15n69BDswF2GrA)
+### Directories
 
-## Address
+```
+src
+├── components // React components with styles
+├── contexts // React contexts
+├── images // image assets
+├── utils // helper functions and constants
+├── vendor // extra libs and fonts
+└── ...
+```
 
-Currently not deployed
+### Usage
+
+```bash
+## Install dependencies (clean install recommended)
+npm ci
+
+## Run project in development mode
+npm start
+
+## Build project for production
+npm run build
+```
+
+### Env
+
+API address need to be specified in **.env** file located in root folder.
+
+#### Example of .env file config for develop mode
+
+```text
+REACT_APP_API_BASE_URL=http://localhost:3002
+```

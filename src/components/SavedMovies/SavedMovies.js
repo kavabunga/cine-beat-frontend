@@ -32,7 +32,7 @@ export default function SavedMovies({
         } else {
           setIsSearchDisabled(true);
           setInfoMessage({
-            message: 'Ничего не найдено. Здесь появятся отмеченные фильмы',
+            message: 'Nothing found. Tagged films will appear here',
             type: 'info',
           });
         }
@@ -44,6 +44,7 @@ export default function SavedMovies({
         });
       })
       .finally(() => setIsLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setInfoMessage, setIsLoading]);
 
   React.useEffect(() => {
@@ -52,6 +53,7 @@ export default function SavedMovies({
 
   React.useEffect(() => {
     request ? handleSearch() : setResult(bookmarkedMovies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookmarkedMovies]);
 
   function getMovies() {
@@ -65,19 +67,17 @@ export default function SavedMovies({
   }
 
   function handleSearch() {
-    return Promise.resolve(filterOnRequest(request, bookmarkedMovies)).then(
-      (res) => {
-        setResult(res);
-        return res;
-      }
-    );
+    return Promise.resolve(filterOnRequest(request, bookmarkedMovies)).then((res) => {
+      setResult(res);
+      return res;
+    });
   }
 
   return (
     <Movies
       isLoading={isLoading}
       setIsLoading={setIsLoading}
-      buttonType='delete'
+      buttonType="delete"
       onSearch={handleSearch}
       infoMessage={infoMessage}
       setInfoMessage={setInfoMessage}

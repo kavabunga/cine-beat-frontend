@@ -11,7 +11,9 @@
   background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
-  transition: opacity 0.1s ease, background-color 0.2s ease,
+  transition:
+    opacity 0.1s ease,
+    background-color 0.2s ease,
     background-image 0.2s ease;
 }
 

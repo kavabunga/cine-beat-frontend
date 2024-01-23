@@ -31,14 +31,14 @@ export default function Movies({
       .then((res) => {
         res.length === 0 &&
           setInfoMessage({
-            message: 'Ничего не найдено',
+            message: 'Nothing found',
             type: 'info',
           });
       })
       .catch(() => {
         setInfoMessage({
           message:
-            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+            'An error occurred during the request. There may be a connection problem or the server is unavailable. Wait a moment and try again',
           type: 'error',
         });
       })
@@ -60,11 +60,11 @@ export default function Movies({
       .then((res) =>
         res !== undefined && res._id
           ? res._id
-          : Promise.reject(new Error('Не удалось удалить фильм из закладок'))
+          : Promise.reject(new Error('Failed to remove movie from bookmarks')),
       )
       .then((res) => mainApi.deleteBookmarkedMovie(res))
       .then((res) =>
-        setBookmarkedMovies((state) => state.filter((c) => c._id !== res._id))
+        setBookmarkedMovies((state) => state.filter((c) => c._id !== res._id)),
       );
   }
 
@@ -111,7 +111,7 @@ export default function Movies({
               type='button'
               onClick={showMore}
             >
-              Ещё
+              More
             </button>
           ) : (
             <div className='movies__spacer' />

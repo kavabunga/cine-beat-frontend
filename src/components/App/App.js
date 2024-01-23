@@ -41,6 +41,7 @@ function App() {
         .catch((err) => console.log(err.message))
         .finally(() => setUserIsChecking(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -60,7 +61,7 @@ function App() {
     let params;
     GALLERY_BREAKPOINTS.forEach(
       (b) =>
-        window.matchMedia(`(min-width: ${b.width}px)`).matches && (params = b)
+        window.matchMedia(`(min-width: ${b.width}px)`).matches && (params = b),
     );
     return params;
   }
@@ -83,7 +84,7 @@ function App() {
         setInfoMessage({
           message: err.message,
           type: 'error',
-        })
+        }),
       )
       .finally(() => setIsSubmitting(false));
   }
@@ -131,7 +132,7 @@ function App() {
       .updateUser(credentials)
       .then((res) => {
         setInfoMessage({
-          message: 'Данные обновлены',
+          message: 'Data updated',
           type: 'success',
         });
         const { name, email } = res;
@@ -151,10 +152,7 @@ function App() {
       <div className='app'>
         {headerShowForPaths.includes(location.pathname) && <Header />}
         <Routes>
-          <Route
-            path='/'
-            element={<Main />}
-          />
+          <Route path='/' element={<Main />} />
           <Route
             path='/movies'
             element={
@@ -223,10 +221,7 @@ function App() {
               />
             }
           />
-          <Route
-            path='*'
-            element={<NotFound />}
-          />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         {footerShowForPaths.includes(location.pathname) && <Footer />}
       </div>
